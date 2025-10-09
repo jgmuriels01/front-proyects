@@ -1,0 +1,50 @@
+/* @author MurielSG */
+:root {
+    --color-white: #F9FAFB;
+    --color-black: #111827;
+    --color-blue: #3B82F6;
+    --color-red: #EF4444;
+    --color-light-grey: #9CA3AF;
+    --color-dark-grey: #6B7280;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 100px;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+h1 {
+    font-size: 64px;
+}
+
+main {
+    font-size: 24px;
+    line-height: 46px;
+    border: 2px solid var(--color-light-grey);
+    border-radius: 50px;
+    padding-inline: 50px;
+    padding-block: 10px;
+    label, input {
+        margin-left: 20px;
+    }
+    input {
+        font-size: 24px;
+    }
+}
+
+input{
+    border: 2px solid var(--color-light-grey);
+    border-radius: 50px;
+    background-color: var(--color-blue);
+    color: var(--color-black);
+    padding-inline: 15px;
+}
+
+
+
