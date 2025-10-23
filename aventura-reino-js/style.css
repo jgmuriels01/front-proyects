@@ -1,3 +1,17 @@
+:root{
+    --primary-color: rgb(71, 36, 9);
+    --secondary-color: rgb(202, 183, 8);
+    --accent-color: rgb(51, 218, 45);
+    --danger-color: rgb(249, 65, 19);
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 *{
     background-color: #191919;
