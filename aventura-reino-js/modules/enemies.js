@@ -1,36 +1,25 @@
 
 
-export class Enemigo {
-    type;
-    name;
-    levelAtaque;
-    hp;
+export class Enemy {
 
-    constructor(type, name, levelAtaque, hp) {
-        this.type = 'Enemigo';
+    constructor(name, hp, attack) {
         this.name = name;
-        this.levelAtaque = levelAtaque;
         this.hp = hp;
+        this.attack = attack;
     }
 
-    action() {
-        return `Tipo: ${this.type} | Nombre: ${this.name} | Nivel de ataque: ${this.levelAtaque} | Puntos de vida: ${this.hp}`;
-    }
 }
 
-export class JefeFinal extends Enemigo {
-    specialSkill;
-    multiplierDamage;
+export class FinalBoss extends Enemy {
 
-    constructor(type, name, levelAtaque, hp, specialSkill, multiplierDamage) {
-        super(type, name, levelAtaque, hp);
-        this.type = 'Jefe';
+    constructor(name, hp, attack, specialSkill, multiplierDamage) {
+        super(name, hp, attack, hp);
         this.specialSkill = specialSkill;
         this.multiplierDamage = multiplierDamage;
     }
 
-    action() {
-        return `Tipo: ${this.type}. Soy ${this.name}. Habilidad especial: ${this.specialSkill}. Daño multiplicado por ${this.multiplierDamage}.`;
+    get attack(){
+        return this.attack * this.multiplierDamage
     }
 }
 
