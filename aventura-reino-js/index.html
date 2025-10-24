@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang='es'>
+
 <head>
-    <meta charset='utf-8'>  
+    <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='style.css'>
     <script type="module" src='script.js' defer></script>
@@ -10,43 +11,49 @@
 
 <body>
     <header>
-    <h1 id="title">Aventura en el Reino de JS</h1>
-</header>
-<div id="scene-1" class="scene">
-    <div id="scene-1-container">
-
+        <h1 id="title">Aventura en el Reino de JS</h1>
+    </header>
+    <div id="scene-1" class="scene">
+        <div id="scene-1-container">
+            <div>
+                <img id="player-img" alt="player-img">
+                <div id="player-name"></div>
+            </div>
+            <div id="player-stats"></div>
+            <button>Continuar</button>
+        </div>
     </div>
-<button>Continuar</button>
-</div>
-
-<footer>
-    <div id="inventory-container">
-        <div class="item">
-            <img src="" alt="">
+    <div id="scene-2" class="scene">
+        <h2>Mercado</h2>
+        <div id="scene-2-container">
+            <div id="shop"></div>
+            <button>Continuar</button>
         </div>
-
-        <div class="item">
-            <img src="" alt="">
-        </div>
-
-        <div class="item">
-            <img src="" alt="">
-        </div>
-
-        <div class="item">
-            <img src="" alt="">
-        </div>
-
-        <div class="item">
-            <img src="" alt="">
-        </div>
-
-        <div class="item">
-            <img src="" alt="">
-        </div>
-        
     </div>
-</footer>
+
+    <footer>
+        <div id="inventory-container">
+            <div class="item">
+                <img src="" alt="">
+            </div>
+            <div class="item">
+                <img src="" alt="">
+            </div>
+            <div class="item">
+                <img src="" alt="">
+            </div>
+            <div class="item">
+                <img src="" alt="">
+            </div>
+            <div class="item">
+                <img src="" alt="">
+            </div>
+            <div class="item">
+                <img src="" alt="">
+            </div>
+        </div>
+    </footer>
 
 </body>
+
 </html>

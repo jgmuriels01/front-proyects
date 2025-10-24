@@ -1,11 +1,9 @@
-
-
 export class Enemy {
 
     constructor(name, hp, attack) {
         this.name = name;
         this.hp = hp;
-        this.attack = attack;
+        this.baseAttack = attack;
     }
 
 }
@@ -13,7 +11,7 @@ export class Enemy {
 export class FinalBoss extends Enemy {
 
     constructor(name, hp, attack, specialSkill, multiplierDamage) {
-        super(name, hp, attack, hp);
+        super(name, hp, attack);
         this.specialSkill = specialSkill;
         this.multiplierDamage = multiplierDamage;
     }
