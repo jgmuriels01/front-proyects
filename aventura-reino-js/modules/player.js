@@ -19,7 +19,7 @@ export class Player {
 
     addHp(hp) {
         this.hp += hp;
-        if(hp > this.maxHp){
+        if (hp > this.maxHp) {
             this.maxHp = hp
         }
     }
@@ -34,8 +34,7 @@ export class Player {
     // Add product to inventory and update stats
     buyProduct(product) {
         if (this.inventory.length <= 6) {
-            this.inventory.push(product);
-            this.updateStats();
+            this.inventory.push(product)
         }
 
     }
@@ -59,7 +58,10 @@ export class Player {
 
     showInventory(nodes) {
         for (let i = 0; i < nodes.length && i < this.inventory.length; i++) {
-            this.inventory[i].show(nodes[i])
+            let imgElement = document.createElement('img')
+            this.inventory[i].showProduct(imgElement)
+            nodes[i].innerHTML = ""
+            nodes[i].append(imgElement)
         }
     }
 
@@ -83,7 +85,7 @@ export class Player {
         node.append(defenseElement)
     }
 
-    showPlayer(node){
+    showPlayer(node) {
         /* get nodes */
         let playerImgElement = node.querySelector('.player-img')
         let playerNameElement = node.querySelector('.player-name')

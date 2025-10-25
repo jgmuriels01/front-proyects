@@ -7,42 +7,26 @@ import { Player } from './modules/player.js'
 import { Product } from './modules/product.js'
 import { showRanking } from './modules/ranking.js'
 
-
-/* testing */
-/* PLAYER.buyProduct(findProduct(SHOP, 'Espada de madera'))
-console.log(PLAYER.inventory) */
-
 /* Init */
 let copy = structuredClone(PLAYER)
-let battles = 0
+let battleCounter = 0
 let initialScene = "scene-player"
 showScene(initialScene)
 PLAYER.showPlayer(document.getElementById(initialScene))
 
-
 /* Reset */
 function reset() {
-    PLAYER = structuredClone(copy)
-    battles = 0
+    PLAYER.points = copy.points
+    PLAYER.hp = copy.hp
+    PLAYER.inventory = [...copy.inventory]
+    PLAYER.attack = copy.attack
+    PLAYER.defense = copy.defense
+    battleCounter = 0
+    footerInventoryItemElements.forEach(item => item.innerHTML = "")
 }
 
 /* footer inventory */
-let footerElement = document.getElementById('footer');
-let footerInventory = document.querySelectorAll('#inventory-container .item img')
-
-/* Shop */
-let shopElement = document.getElementById('shop')
-showShop(shopElement, SHOP)
-let buyButtonsElements = document.querySelectorAll("#shop button")
-buyButtonsElements.forEach(buyButton => {
-    buyButton.addEventListener("click", () => {
-        PLAYER.buyProduct(findProduct(SHOP, buyButton.parentElement.id))
-        PLAYER.showInventory(footerInventory)
-    })
-})
-
-
-
+let footerInventoryItemElements = document.querySelectorAll('#inventory-container .item')
 
 /* CONTINUE and RESET buttons */
 let playerContinueButtonElement = document.getElementById("player-continue")
@@ -51,33 +35,55 @@ let playerInventoryContinueButtonElement = document.getElementById("player-inven
 let enemiesContinueButtonElement = document.getElementById("enemies-continue")
 let battleContinueButtonElement = document.getElementById("battle-continue")
 let rankingResetButtonElement = document.getElementById("ranking-reset")
+
 /* continue button PLAYER */
-playerContinueButtonElement.addEventListener("click", () => showScene("scene-shop"))
+playerContinueButtonElement.addEventListener("click", () => {
+    showScene("scene-shop")
+    let shopElement = document.getElementById('shop')
+    shopElement.innerHTML = ""; /* Delete previous shop */
+    showShop(shopElement, SHOP)
+    /* add evetListener to all buttons */
+    let buyButtonsElements = document.querySelectorAll("#shop button")
+    buyButtonsElements.forEach(buyButton => {
+        buyButton.addEventListener("click", () => {
+            PLAYER.buyProduct(findProduct(SHOP, buyButton.parentElement.id))
+            PLAYER.showInventory(footerInventoryItemElements)
+        })
+    })
+})
+
 /* continue button SHOP */
 shopContinueButtonElement.addEventListener("click", () => {
     showScene("scene-player-inventory");
-    PLAYER.showPlayer(document.getElementById("scene-player-inventory"))
+    PLAYER.updateStats()
+    PLAYER.showPlayer(document.getElementById("scene-player-inventory")) /* show player info */
 })
+
 /* continue button PLAYER-INVENTORY */
 playerInventoryContinueButtonElement.addEventListener("click", () => {
     showScene("scene-enemies")
+    /* get and clean nodes */
     let enemiesElement = document.getElementById("enemies")
+    enemiesElement.innerHTML = ""
     let finalBossesElement = document.getElementById("final-bosses")
+    finalBossesElement.innerHTML = ""
+    /* fill nodes */
     ENEMIES.forEach(enemy => enemy.showEnemy(enemiesElement))
     FINAL_BOSSES.forEach(finalBoss => finalBoss.showEnemy(finalBossesElement))
 })
+
 /* continue button ENEMIES */
 enemiesContinueButtonElement.addEventListener("click", () => {
     showScene("scene-battle")
-    battles++
-    showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES)
+    battleCounter++
+    showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter)
 })
 /* continue button BATTLE */
 battleContinueButtonElement.addEventListener("click", () => {
-    if (battles < 3) {
-        battles++
+    if (battleCounter < 3) {
+        battleCounter++
         showScene("scene-battle")
-        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES)
+        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter)
     } else {
         showScene("scene-ranking")
         showRanking(document.getElementById('scene-ranking-container'), PLAYER, PROPLAYER_POINTS)
@@ -88,6 +94,7 @@ rankingResetButtonElement.addEventListener("click", () => {
     showScene("scene-player")
     reset()
     PLAYER.showPlayer(document.getElementById(initialScene))
+    PLAYER.showInventory(footerInventoryItemElements)
 })
 
 

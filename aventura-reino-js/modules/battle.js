@@ -26,14 +26,18 @@ function randomEnemy(enemies, bosses) {
     }
 }
 
-export function showBattle(node, player, enemies, bosses) {
+export function showBattle(node, player, enemies, bosses, battleCounter) {
     let enemy = randomEnemy(enemies, bosses)
     let pointsWon = battle(player, enemy)
-    /* battle sub nodes */
+    /* battle count */
+    let battleCountElement = document.getElementById('battle-count')
+    battleCountElement.innerText = `Batalla ${battleCounter}`
+    /* battle nodes */
     let playerBattleElement = node.querySelector('#player-battle')
     let enemyBattleElement = node.querySelector('#enemy-battle')
     playerBattleElement.innerHTML = ""
     enemyBattleElement.innerHTML = ""
+    /* battle sub-nodes */
     let playerNameElement = document.createElement('h2')
     let playerImgElement = document.createElement('img')
     let enemyNameElement = document.createElement('h2')

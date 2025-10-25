@@ -11,6 +11,7 @@
     padding: 0;
     box-sizing: border-box;
 
+
 }
 
 header {
@@ -25,6 +26,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+
 }
 
 main {
@@ -32,6 +34,10 @@ main {
 
     .scene {
         display: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-self: center;
     }
 
     .scene.active {
@@ -174,4 +180,17 @@ footer {
         align-items: center;
         justify-content: center;
     }
+}
+
+#player-continue,
+#shop-continue,
+#player-inventory-continue,
+#enemies-continue,
+#battle-continue,
+#ranking-reset {
+    width: 150px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 20px;
 }
