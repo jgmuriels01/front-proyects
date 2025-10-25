@@ -13,26 +13,18 @@ import { showRanking } from './modules/ranking.js'
 console.log(PLAYER.inventory) */
 
 /* Init */
-let initialScene = "scene-player"
-showScene(initialScene)
 let copy = structuredClone(PLAYER)
 let battles = 0
+let initialScene = "scene-player"
+showScene(initialScene)
+PLAYER.showPlayer(document.getElementById(initialScene))
+
 
 /* Reset */
-function reset(){
+function reset() {
     PLAYER = structuredClone(copy)
     battles = 0
 }
-
-
-/* Player */
-let playerImgElements = document.querySelectorAll('.player-img')
-let playerNameElements = document.querySelectorAll('.player-name')
-let playerStatsElements = document.querySelectorAll('.player-stats')
-playerImgElements.forEach(e => e.setAttribute('src', PLAYER.src))
-playerNameElements.forEach(e => e.innerText = PLAYER.name)
-playerStatsElements.forEach(e => PLAYER.showStats(e))
-
 
 /* footer inventory */
 let footerElement = document.getElementById('footer');
@@ -40,7 +32,7 @@ let footerInventory = document.querySelectorAll('#inventory-container .item img'
 
 /* Shop */
 let shopElement = document.getElementById('shop')
-showShop(SHOP, shopElement)
+showShop(shopElement, SHOP)
 let buyButtonsElements = document.querySelectorAll("#shop button")
 buyButtonsElements.forEach(buyButton => {
     buyButton.addEventListener("click", () => {
@@ -49,34 +41,38 @@ buyButtonsElements.forEach(buyButton => {
     })
 })
 
-/* Enemies */
-let enemiesElement = document.getElementById("enemies")
-let finalBossesElement = document.getElementById("final-bosses")
-ENEMIES.forEach(enemy => enemy.showEnemy(enemiesElement))
-FINAL_BOSSES.forEach(finalBoss => finalBoss.showEnemy(finalBossesElement))
 
 
 
-
-/* Continue buttons */
+/* CONTINUE and RESET buttons */
 let playerContinueButtonElement = document.getElementById("player-continue")
 let shopContinueButtonElement = document.getElementById("shop-continue")
 let playerInventoryContinueButtonElement = document.getElementById("player-inventory-continue")
 let enemiesContinueButtonElement = document.getElementById("enemies-continue")
 let battleContinueButtonElement = document.getElementById("battle-continue")
 let rankingResetButtonElement = document.getElementById("ranking-reset")
-
+/* continue button PLAYER */
 playerContinueButtonElement.addEventListener("click", () => showScene("scene-shop"))
+/* continue button SHOP */
 shopContinueButtonElement.addEventListener("click", () => {
     showScene("scene-player-inventory");
-    playerStatsElements.forEach(e => PLAYER.showStats(e))
+    PLAYER.showPlayer(document.getElementById("scene-player-inventory"))
 })
-playerInventoryContinueButtonElement.addEventListener("click", () => showScene("scene-enemies"))
+/* continue button PLAYER-INVENTORY */
+playerInventoryContinueButtonElement.addEventListener("click", () => {
+    showScene("scene-enemies")
+    let enemiesElement = document.getElementById("enemies")
+    let finalBossesElement = document.getElementById("final-bosses")
+    ENEMIES.forEach(enemy => enemy.showEnemy(enemiesElement))
+    FINAL_BOSSES.forEach(finalBoss => finalBoss.showEnemy(finalBossesElement))
+})
+/* continue button ENEMIES */
 enemiesContinueButtonElement.addEventListener("click", () => {
     showScene("scene-battle")
     battles++
     showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES)
 })
+/* continue button BATTLE */
 battleContinueButtonElement.addEventListener("click", () => {
     if (battles < 3) {
         battles++
@@ -87,9 +83,11 @@ battleContinueButtonElement.addEventListener("click", () => {
         showRanking(document.getElementById('scene-ranking-container'), PLAYER, PROPLAYER_POINTS)
     }
 })
+/* reset button RANKING */
 rankingResetButtonElement.addEventListener("click", () => {
     showScene("scene-player")
     reset()
+    PLAYER.showPlayer(document.getElementById(initialScene))
 })
 
 

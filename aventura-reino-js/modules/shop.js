@@ -10,19 +10,24 @@ export function applyDiscount(shop, rarity, discount) {
     filterMarket(rarity, shop).forEach(product => product.discount(discount))
 }
 
-export function showShop(shop, node){
+export function showShop(node, shop){
     shop.forEach(product => {
+        /* main node */
         let productElement = document.createElement('div')
+        productElement.id = product.id
+        /* sub-main node layer */
         let imgElement = document.createElement('img')
         let priceElement = document.createElement('div')
         let comprarElement = document.createElement('button')
-        productElement.id = product.id
-        product.show(imgElement)
+        /* sub-main node layer FILL */
+        product.showProduct(imgElement)
         priceElement.innerText = `${product.price}$`
         comprarElement.innerText = 'Comprar'
+        /* sub-main node layer APPEND */
         productElement.append(imgElement)
         productElement.append(priceElement)
         productElement.append(comprarElement)
+        /* main node append */
         node.append(productElement)
     });
 }

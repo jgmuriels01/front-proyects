@@ -19,7 +19,7 @@ export class Product {
         this.price = Math.round(this.price * (discount / 100)) // No decimals in prices
     }
 
-    show(img){
+    showProduct(img){
         img.setAttribute('src',this.src)
         img.setAttribute('alt',this.name)
         img.setAttribute('title',this.name)

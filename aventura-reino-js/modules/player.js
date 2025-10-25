@@ -64,18 +64,33 @@ export class Player {
     }
 
     showStats(node) {
+        /* restet */
         node.innerHTML = ""
+        /* nodes creation*/
         let pointsElement = document.createElement('div')
         let hpElement = document.createElement('div')
         let attackElement = document.createElement('div')
         let defenseElement = document.createElement('div')
+        /* fill nodes */
         pointsElement.innerText = `Points = ${this.points}`
         hpElement.innerText = `HP = ${this.hp}/${this.maxHp}`
         attackElement.innerText = `Attack = ${this.attack}`
         defenseElement.innerText = `Defense = ${this.defense}`
+        /* append nodes */
         node.append(pointsElement)
         node.append(hpElement)
         node.append(attackElement)
         node.append(defenseElement)
+    }
+
+    showPlayer(node){
+        /* get nodes */
+        let playerImgElement = node.querySelector('.player-img')
+        let playerNameElement = node.querySelector('.player-name')
+        let playerStatsElement = node.querySelector('.player-stats')
+        /* fill nodes */
+        playerImgElement.setAttribute('src', this.src)
+        playerNameElement.innerText = this.name
+        this.showStats(playerStatsElement)
     }
 }

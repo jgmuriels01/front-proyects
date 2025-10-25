@@ -29,6 +29,7 @@ function randomEnemy(enemies, bosses) {
 export function showBattle(node, player, enemies, bosses) {
     let enemy = randomEnemy(enemies, bosses)
     let pointsWon = battle(player, enemy)
+    /* battle sub nodes */
     let playerBattleElement = node.querySelector('#player-battle')
     let enemyBattleElement = node.querySelector('#enemy-battle')
     playerBattleElement.innerHTML = ""
@@ -45,10 +46,7 @@ export function showBattle(node, player, enemies, bosses) {
     playerBattleElement.append(playerImgElement)
     enemyBattleElement.append(enemyNameElement)
     enemyBattleElement.append(enemyImgElement)
-
-
-
-
+    /* battle-info */
     let winnerElement = node.querySelector('#winner')
     let points = node.querySelector('#points')
     points.innerText = pointsWon
