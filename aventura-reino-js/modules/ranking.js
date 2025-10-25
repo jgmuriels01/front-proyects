@@ -9,10 +9,19 @@ function categorizePlayers(players, proPoints) {
     return categorizedPlayers;
 }
 
-export function categorizePlayer(player, proPoints) {
+function categorizePlayer(player, proPoints) {
     return player.points >= proPoints ? 'ProPlayer' : 'Rookie';
 }
 
 function rankPlayers(players) {
     return players.sort((a, b) => b.points - a.points);;
+}
+
+export function showRanking(node, player, proPoints){
+    let playerName = node.querySelector('#player-name-ranking')
+    let playerCategory = node.querySelector('#player-category')
+    let playerPoints = node.querySelector('#points-ranking')
+    playerName.innerText = player.name
+    playerCategory.innerText = categorizePlayer(player, proPoints)
+    playerPoints.innerText = player.points
 }

@@ -10,7 +10,7 @@ export class Player {
         this.inventory = []
         this.attack = 5
         this.defense = 0
-        this.src = 'https://picsum.photos/150/150'
+        this.src = './IMG/knight.png'
     }
 
     addPoint(points) {

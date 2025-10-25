@@ -1,12 +1,12 @@
 function battle(player, enemy) {
-    let enemyPower = Math.max(5, player.defense - enemy.attack);
+    let enemyPower = Math.max(5, enemy.attack - player.defense);
     let enemyOriginalHp = enemy.hp;
     while (player.hp > 0 && enemy.hp > 0) {
         enemy.hp -= player.attack;
         player.hp -= enemyPower;
     }
     if (player.hp > 0 && enemy.hp <= 0) {
-        player.points += enemyPower;
+        player.addPoint(enemyPower)
         return enemyPower
     }
     return 0

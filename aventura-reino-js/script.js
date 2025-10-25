@@ -5,7 +5,7 @@ import { Enemy, FinalBoss } from './modules/enemies.js'
 import { filterShop, findProduct, applyDiscount, showShop } from './modules/shop.js'
 import { Player } from './modules/player.js'
 import { Product } from './modules/product.js'
-import { categorizePlayer } from './modules/ranking.js'
+import { showRanking } from './modules/ranking.js'
 
 
 /* testing */
@@ -13,15 +13,22 @@ import { categorizePlayer } from './modules/ranking.js'
 console.log(PLAYER.inventory) */
 
 /* Init */
-showScene("scene-shop")
+let initialScene = "scene-player"
+showScene(initialScene)
 let copy = structuredClone(PLAYER)
 let battles = 0
+
+/* Reset */
+function reset(){
+    PLAYER = structuredClone(copy)
+    battles = 0
+}
+
 
 /* Player */
 let playerImgElements = document.querySelectorAll('.player-img')
 let playerNameElements = document.querySelectorAll('.player-name')
 let playerStatsElements = document.querySelectorAll('.player-stats')
-let playerInventory = PLAYER.inventory
 playerImgElements.forEach(e => e.setAttribute('src', PLAYER.src))
 playerNameElements.forEach(e => e.innerText = PLAYER.name)
 playerStatsElements.forEach(e => PLAYER.showStats(e))
@@ -77,9 +84,13 @@ battleContinueButtonElement.addEventListener("click", () => {
         showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES)
     } else {
         showScene("scene-ranking")
+        showRanking(document.getElementById('scene-ranking-container'), PLAYER, PROPLAYER_POINTS)
     }
 })
-rankingResetButtonElement.addEventListener("click", () => showScene("scene-player"))
+rankingResetButtonElement.addEventListener("click", () => {
+    showScene("scene-player")
+    reset()
+})
 
 
 
