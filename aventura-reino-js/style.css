@@ -12,13 +12,15 @@
     box-sizing: border-box;
 
 }
-header{
+
+header {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: orange;
     height: 100px;
 }
+
 body {
     height: 100vh;
     display: grid;
@@ -29,16 +31,11 @@ main {
     margin: 64px;
 
     .scene {
-
-        #scene-1-container {
-            background-color: blue;
-
-        }
-
+        display: none;
     }
 
-    #scene-2 {
-        display: none;
+    .scene.active {
+        display: block;
     }
 }
 
@@ -87,4 +84,52 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 10px;
+}
+
+#shop>div {
+    background-color: rgb(130, 130, 218);
+    padding: 10px;
+}
+
+#scene-enemies {
+    #enemies {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px;
+    }
+
+    #enemies>div {
+        background-color: rgb(154, 154, 230);
+        width: 200px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin: 20px;
+    }
+
+    #final-bosses {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px;
+    }
+
+    #final-bosses>div {
+        background-color: rgb(154, 154, 230);
+        width: 200px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin: 20px;
+    }
 }

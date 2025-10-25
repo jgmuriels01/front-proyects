@@ -1,5 +1,7 @@
 export class Product {
 
+    static globalId = 0;
+
     constructor(name, price, rarity, type, stat, src) {
         this.name = name;
         this.price = price;
@@ -7,6 +9,8 @@ export class Product {
         this.type = type;
         this.stat = stat;
         this.src = src;
+        Product.globalId++
+        this.id = `producto-${Product.globalId}`
     }
 
     discount(discount) {

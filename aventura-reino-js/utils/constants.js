@@ -7,14 +7,14 @@ export const PROPLAYER_POINTS = 1000;
 export const PLAYER = new Player('Hollow Knight');
 
 export const ENEMIES = [
-    new Enemy('Goblin', 50, 10),
-    new Enemy('Orco', 75, 20),
-    new Enemy('Bandido', 50, 5)
+    new Enemy('Goblin', 50, 10, 'https://picsum.photos/150/150'),
+    new Enemy('Orco', 75, 20, 'https://picsum.photos/150/150'),
+    new Enemy('Bandido', 50, 5, 'https://picsum.photos/150/150')
 ];
 
 export const FINAL_BOSSES = [
-    new FinalBoss('Dragón', 150, 50, 'Aliento de fuego', 1.3),
-    new FinalBoss('Kraken', 200, 40, 'Tsunami', 1.3)
+    new FinalBoss('Dragón', 150, 50, 'Aliento de fuego', 1.3, 'https://picsum.photos/150/150'),
+    new FinalBoss('Kraken', 200, 40, 'Tsunami', 1.3, 'https://picsum.photos/150/150')
 ];
 
 export const SHOP = [

@@ -2,8 +2,8 @@ export function filterShop(rarity, shop) {
     return shop.filter(product => product.rarity === rarity);
 }
 
-export function findProduct(shop, name) {
-    return shop.find(product => product.name.toLowerCase() === name.toLowerCase());
+export function findProduct(shop, id) {
+    return shop.find(product => product.id === id);
 }
 
 export function applyDiscount(shop, rarity, discount) {
@@ -16,8 +16,9 @@ export function showShop(shop, node){
         let imgElement = document.createElement('img')
         let priceElement = document.createElement('div')
         let comprarElement = document.createElement('button')
+        productElement.id = product.id
         product.show(imgElement)
-        priceElement.innerText = `${product.price} $`
+        priceElement.innerText = `${product.price}$`
         comprarElement.innerText = 'Comprar'
         productElement.append(imgElement)
         productElement.append(priceElement)

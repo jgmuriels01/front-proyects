@@ -1,13 +1,16 @@
+import { Product } from "./product.js";
+
 export class Player {
 
     constructor(name) {
-        this.name = name;
-        this.points = 0;
-        this.maxHp = 100;
-        this.hp = 100;
-        this.inventory = [];
-        this.attack = 5;
-        this.defense = 0;
+        this.name = name
+        this.points = 0
+        this.maxHp = 100
+        this.hp = 100
+        this.inventory = []
+        this.attack = 5
+        this.defense = 0
+        this.src = 'https://picsum.photos/150/150'
     }
 
     addPoint(points) {
@@ -16,6 +19,9 @@ export class Player {
 
     addHp(hp) {
         this.hp += hp;
+        if(hp > this.maxHp){
+            this.maxHp = hp
+        }
     }
 
     addAttack(attack) {
@@ -23,16 +29,19 @@ export class Player {
     }
 
     addDefese(defense) {
-        this.hp += defense;
+        this.defense += defense;
     }
     // Add product to inventory and update stats
     buyProduct(product) {
-        this.inventory.push(product);
-        this.updateStats();
+        if (this.inventory.length <= 6) {
+            this.inventory.push(product);
+            this.updateStats();
+        }
+
     }
 
     updateStats() {
-        for (let product in this.inventory) {
+        this.inventory.forEach(product => {
             switch (product.type) {
                 case "Weapon":
                     this.addAttack(product.stat);
@@ -44,7 +53,8 @@ export class Player {
                     this.addHp(product.stat);
                     break;
             }
-        }
+            console.log(`cambiando stats ${product.type}`)
+        });
     }
 
     showInventory(nodes) {
@@ -54,6 +64,7 @@ export class Player {
     }
 
     showStats(node) {
+        node.innerHTML = ""
         let pointsElement = document.createElement('div')
         let hpElement = document.createElement('div')
         let attackElement = document.createElement('div')

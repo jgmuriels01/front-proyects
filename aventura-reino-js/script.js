@@ -1,34 +1,85 @@
 import { PROPLAYER_POINTS, PLAYER, ENEMIES, FINAL_BOSSES, SHOP } from './utils/constants.js';
-import { battle } from './modules/battle.js'
+import { showScene } from './utils/scene.js';
+import { showBattle } from './modules/battle.js'
 import { Enemy, FinalBoss } from './modules/enemies.js'
 import { filterShop, findProduct, applyDiscount, showShop } from './modules/shop.js'
 import { Player } from './modules/player.js'
 import { Product } from './modules/product.js'
 import { categorizePlayer } from './modules/ranking.js'
 
+
 /* testing */
-PLAYER.buyProduct(findProduct(SHOP, 'Espada de madera'))
-console.log(PLAYER.inventory)
+/* PLAYER.buyProduct(findProduct(SHOP, 'Espada de madera'))
+console.log(PLAYER.inventory) */
 
-
+/* Init */
+showScene("scene-shop")
+let copy = structuredClone(PLAYER)
+let battles = 0
 
 /* Player */
-let playerImgElement = document.getElementById('player-img')
-let playerNameElement = document.getElementById('player-name')
-let playerStatsElement = document.getElementById('player-stats')
+let playerImgElements = document.querySelectorAll('.player-img')
+let playerNameElements = document.querySelectorAll('.player-name')
+let playerStatsElements = document.querySelectorAll('.player-stats')
 let playerInventory = PLAYER.inventory
-playerImgElement.setAttribute('src', 'https://picsum.photos/150/150')
-playerNameElement.innerText = PLAYER.name
-PLAYER.showStats(playerStatsElement)
+playerImgElements.forEach(e => e.setAttribute('src', PLAYER.src))
+playerNameElements.forEach(e => e.innerText = PLAYER.name)
+playerStatsElements.forEach(e => PLAYER.showStats(e))
 
-/* Shop */
-let shopElement = document.getElementById('shop')
-showShop(SHOP, shopElement)
 
 /* footer inventory */
 let footerElement = document.getElementById('footer');
 let footerInventory = document.querySelectorAll('#inventory-container .item img')
-PLAYER.showInventory(footerInventory)
+
+/* Shop */
+let shopElement = document.getElementById('shop')
+showShop(SHOP, shopElement)
+let buyButtonsElements = document.querySelectorAll("#shop button")
+buyButtonsElements.forEach(buyButton => {
+    buyButton.addEventListener("click", () => {
+        PLAYER.buyProduct(findProduct(SHOP, buyButton.parentElement.id))
+        PLAYER.showInventory(footerInventory)
+    })
+})
+
+/* Enemies */
+let enemiesElement = document.getElementById("enemies")
+let finalBossesElement = document.getElementById("final-bosses")
+ENEMIES.forEach(enemy => enemy.showEnemy(enemiesElement))
+FINAL_BOSSES.forEach(finalBoss => finalBoss.showEnemy(finalBossesElement))
+
+
+
+
+/* Continue buttons */
+let playerContinueButtonElement = document.getElementById("player-continue")
+let shopContinueButtonElement = document.getElementById("shop-continue")
+let playerInventoryContinueButtonElement = document.getElementById("player-inventory-continue")
+let enemiesContinueButtonElement = document.getElementById("enemies-continue")
+let battleContinueButtonElement = document.getElementById("battle-continue")
+let rankingResetButtonElement = document.getElementById("ranking-reset")
+
+playerContinueButtonElement.addEventListener("click", () => showScene("scene-shop"))
+shopContinueButtonElement.addEventListener("click", () => {
+    showScene("scene-player-inventory");
+    playerStatsElements.forEach(e => PLAYER.showStats(e))
+})
+playerInventoryContinueButtonElement.addEventListener("click", () => showScene("scene-enemies"))
+enemiesContinueButtonElement.addEventListener("click", () => {
+    showScene("scene-battle")
+    battles++
+    showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES)
+})
+battleContinueButtonElement.addEventListener("click", () => {
+    if (battles < 3) {
+        battles++
+        showScene("scene-battle")
+        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES)
+    } else {
+        showScene("scene-ranking")
+    }
+})
+rankingResetButtonElement.addEventListener("click", () => showScene("scene-player"))
 
 
 
