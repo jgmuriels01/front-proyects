@@ -9,20 +9,20 @@
   <title>Gestión usuario</title>
 </head>
 
-<body>
+<body class="dark-mode">
   <main>
-    <section id="login">
+    <section id="login" class="display">
       <div class="main-container">
         <h1>Log in</h1>
         <input type="text" id="user" placeholder="user">
         <div id="userMessage"></div>
         <input type="text" id="password" placeholder="password">
         <div id="passwordMessage"></div>
-        <button>Log in</button><br>
-        <a>Sig up</a>
+        <button class="bcBlue">Log in</button><br>
+        <a class="cGreen">Sig up</a>
       </div>
     </section>
-    <section id="sigup">
+    <section id="sigup" class="display">
       <div class="main-container">
         <h1>Sign up</h1>
         <input type="text" id="user" placeholder="user">
@@ -33,25 +33,31 @@
         <div id="phoneMessage"></div>
         <input type="number" id="postal-code" placeholder="12345">
         <div id="postalCodeMessage"></div>
-        <input type="checkbox">
-        <span>I'm of legal age</span><br>
-        <input type="number" min="18" max="99" step="1" id="age" placeholder="99">
-        <div id="ageMessage"></div>
-        <button>Create account</button><br>
-        <a>Do you already have an account? Sign up</a>
+        <div>
+          <input type="checkbox" id="legal-age">
+          <span>I'm of legal age</span>
+        </div>
+        <div id="age-container" class="display">
+          <input type="number" min="18" max="99" step="1" id="age" placeholder="99">
+          <div id="ageMessage"></div>
+        </div>
+        <button class="bcBlue">Create account</button><br>
+        <a class="cGreen">Do you already have an account? Sign up</a>
       </div>
     </section>
-    <section id="user-panel">
-      <h2>Welcome, <span id="user"></span></h2>
-      <div>
-        <button>Change theme</button>
-        <button>Sign out</button>
+    <section id="user-panel" class="display">
+      <div class="main-container">
+        <h2>Welcome, <span id="user"></span></h2>
+        <div>
+          <button class="bcBlue">Change theme</button>
+          <button class="bcRed">Sign out</button>
+        </div>
       </div>
     </section>
   </main>
   <footer>
     <span>We use cookies to remember your preferences, agree?</span>
-    <button>Accept cookies</button>
+    <button class="bcBlue">Accept cookies</button>
   </footer>
 </body>
 

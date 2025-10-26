@@ -1,0 +1,127 @@
+:root {
+    --color-white: #F9FAFB;
+    --color-black: #111827;
+    --color-blue: #3B82F6;
+    --color-red: #EF4444;
+    --color-green: #10B981;
+    --color-light-grey: #9CA3AF;
+    --color-dark-grey: #6B7280;
+}
+
+/* IMPORTANT */
+section.display{
+    display: block;
+}
+section{
+    display: none;
+}
+
+#age-container.display{
+    display: block;
+}
+
+#age-container{
+    display: none;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.dark-mode{
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+body{
+    background-color: var(--color-white);
+    color: var(--color-black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    border-top: 2px solid var(--color-dark-grey);
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background-color: var(--color-black);
+    padding: 10px;
+}
+
+/* Containers */
+.main-container{
+    border: 2px solid var(--color-dark-grey);
+    border-radius: 5px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+}
+
+.flexRowCenter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+/* Colors */
+
+.bcBlue{
+    background-color: var(--color-blue);
+}
+.bcRed{
+    background-color: var(--color-red);
+}
+.bcGreen{
+    background-color: var(--color-green);
+}
+
+.cBlue{
+    color: var(--color-blue);
+}
+.cRed{
+    color: var(--color-red);
+}
+.cGreen{
+    color: var(--color-green);
+}
+
+/* Inputs */
+input{
+    background-color: var(--color-light-grey);
+    color: var(--color-black);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    width: 90%;
+}
+
+input[type="checkbox"]{
+    width: auto;
+}
+
+a{
+    margin: 5px;
+}
+
+button{
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    min-width: 100px;
+}
