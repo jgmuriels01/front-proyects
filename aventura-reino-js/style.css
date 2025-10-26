@@ -110,6 +110,9 @@ footer {
     background-color: rgb(130, 130, 218);
     padding: 10px;
 }
+#shop>div.bought {
+    background-color: rgb(209, 218, 130);
+}
 
 #scene-enemies {
     #enemies {

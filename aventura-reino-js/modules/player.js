@@ -31,12 +31,17 @@ export class Player {
     addDefese(defense) {
         this.defense += defense;
     }
-    // Add product to inventory and update stats
-    buyProduct(product) {
-        if (this.inventory.length <= 6) {
-            this.inventory.push(product)
-        }
 
+    buyProduct(product) {
+        if (this.inventory.length < 6) {
+            this.inventory.push(product)
+            return true
+        }
+        return false
+    }
+
+    removeProduct(productToRemove) {
+        this.inventory = this.inventory.filter(product => product !== productToRemove)
     }
 
     updateStats() {

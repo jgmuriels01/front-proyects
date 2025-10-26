@@ -17,7 +17,7 @@ export const FINAL_BOSSES = [
     new FinalBoss('Kraken', 200, 40, 'Tsunami', 1.3, './IMG/kraken.png')
 ];
 
-export const SHOP = [
+export let SHOP = [
     // Weapons
     new Product("Espada de madera", 35, "Common", "Weapon", 5, './IMG/sword.png'),
     new Product("Espada de bronce", 70, "Rare", "Weapon", 10, './IMG/sword.png'),

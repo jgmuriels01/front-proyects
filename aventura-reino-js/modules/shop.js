@@ -1,4 +1,4 @@
-export function filterShop(rarity, shop) {
+function filterShop(rarity, shop) {
     return shop.filter(product => product.rarity === rarity);
 }
 
@@ -7,7 +7,7 @@ export function findProduct(shop, id) {
 }
 
 export function applyDiscount(shop, rarity, discount) {
-    filterMarket(rarity, shop).forEach(product => product.discount(discount))
+    filterShop(rarity, shop).forEach(product => product.discount(discount))
 }
 
 export function showShop(node, shop){
@@ -30,4 +30,15 @@ export function showShop(node, shop){
         /* main node append */
         node.append(productElement)
     });
+}
+
+export function randomRarity(){
+    let rarities = ['Common', 'Rare', 'Legendary']
+    let random = Math.floor(Math.random()*rarities.length)
+    return rarities[random]
+}
+
+export function randomDiscount(){
+    let random = Math.floor(Math.random() * 95) + 5
+    return random
 }

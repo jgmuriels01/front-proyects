@@ -2,27 +2,42 @@ import { PROPLAYER_POINTS, PLAYER, ENEMIES, FINAL_BOSSES, SHOP } from './utils/c
 import { showScene } from './utils/scene.js';
 import { showBattle } from './modules/battle.js'
 import { Enemy, FinalBoss } from './modules/enemies.js'
-import { filterShop, findProduct, applyDiscount, showShop } from './modules/shop.js'
+import { findProduct, applyDiscount, showShop, randomRarity, randomDiscount } from './modules/shop.js'
 import { Player } from './modules/player.js'
 import { Product } from './modules/product.js'
 import { showRanking } from './modules/ranking.js'
 
 /* Init */
-let copy = structuredClone(PLAYER)
+/* init copies */
+let copyPLAYER = structuredClone(PLAYER)
+let copySHOP = []
+SHOP.forEach(product => copySHOP.push(product.clone()))
+/* init game settings */
 let battleCounter = 0
+let rarity = randomRarity()
+let discount = randomDiscount()
+/* init and set scene */
 let initialScene = "scene-player"
 showScene(initialScene)
 PLAYER.showPlayer(document.getElementById(initialScene))
 
 /* Reset */
 function reset() {
-    PLAYER.points = copy.points
-    PLAYER.hp = copy.hp
-    PLAYER.inventory = [...copy.inventory]
-    PLAYER.attack = copy.attack
-    PLAYER.defense = copy.defense
+    /* reset PLAYER */
+    PLAYER.points = copyPLAYER.points
+    PLAYER.hp = copyPLAYER.hp
+    PLAYER.inventory = [...copyPLAYER.inventory]
+    PLAYER.attack = copyPLAYER.attack
+    PLAYER.defense = copyPLAYER.defense
+    /* reset SHOP */
+    SHOP.length = 0
+    copySHOP.forEach(product => SHOP.push(product.clone()))
+    /* reset battle counter and inventory */
     battleCounter = 0
     footerInventoryItemElements.forEach(item => item.innerHTML = "")
+    /* New rarity and discount */
+    rarity = randomRarity()
+    discount = randomDiscount()
 }
 
 /* footer inventory */
@@ -41,13 +56,25 @@ playerContinueButtonElement.addEventListener("click", () => {
     showScene("scene-shop")
     let shopElement = document.getElementById('shop')
     shopElement.innerHTML = ""; /* Delete previous shop */
+    document.getElementById('discount').innerText = discount
+    document.getElementById('rarity').innerText = rarity
+    applyDiscount(SHOP, rarity, discount)
     showShop(shopElement, SHOP)
     /* add evetListener to all buttons */
     let buyButtonsElements = document.querySelectorAll("#shop button")
     buyButtonsElements.forEach(buyButton => {
         buyButton.addEventListener("click", () => {
-            PLAYER.buyProduct(findProduct(SHOP, buyButton.parentElement.id))
+            if (shopElement.querySelector('#' + buyButton.parentElement.id).classList.contains('bought')) {
+                PLAYER.removeProduct(findProduct(SHOP, buyButton.parentElement.id))
+                shopElement.querySelector('#' + buyButton.parentElement.id).classList.toggle('bought')
+            } else {
+                if (PLAYER.buyProduct(findProduct(SHOP, buyButton.parentElement.id))) {
+                    shopElement.querySelector('#' + buyButton.parentElement.id).classList.toggle('bought')
+                }
+            }
+            footerInventoryItemElements.forEach(item => item.innerHTML = "")
             PLAYER.showInventory(footerInventoryItemElements)
+            console.log(PLAYER.inventory.length)
         })
     })
 })
