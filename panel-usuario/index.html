@@ -14,21 +14,21 @@
     <section id="login" class="display">
       <div class="main-container">
         <h1>Log in</h1>
-        <input type="text" id="user" placeholder="user">
-        <div id="userMessage"></div>
-        <input type="text" id="password" placeholder="password">
-        <div id="passwordMessage"></div>
-        <button class="bcBlue">Log in</button><br>
-        <a class="cGreen">Sig up</a>
+        <input type="text" id="userLogin" placeholder="user">
+        <div id="userMessage" class="errorMessage"></div>
+        <input type="text" id="passwordLogin" placeholder="password">
+        <div id="passwordMessage" class="errorMessage"></div>
+        <button class="bcBlue" id="loginButton" disabled>Log in</button><br>
+        <a class="cGreen" id="signupLink">Sign up</a>
       </div>
     </section>
-    <section id="sigup" class="display">
+    <section id="sigup" class="">
       <div class="main-container">
         <h1>Sign up</h1>
-        <input type="text" id="user" placeholder="user">
-        <div id="userMessage"></div>
-        <input type="text" id="password" placeholder="password">
-        <div id="passwordMessage"></div>
+        <input type="text" id="userSignup" placeholder="user">
+        <div id="userMessage" class="errorMessage"></div>
+        <input type="text" id="passwordSignup" placeholder="password">
+        <div id="passwordMessage" class="errorMessage"></div>
         <input type="number" id="phone" placeholder="123456789">
         <div id="phoneMessage"></div>
         <input type="number" id="postal-code" placeholder="12345">
@@ -37,7 +37,7 @@
           <input type="checkbox" id="legal-age">
           <span>I'm of legal age</span>
         </div>
-        <div id="age-container" class="display">
+        <div id="age-container" class="">
           <input type="number" min="18" max="99" step="1" id="age" placeholder="99">
           <div id="ageMessage"></div>
         </div>
@@ -45,7 +45,7 @@
         <a class="cGreen">Do you already have an account? Sign up</a>
       </div>
     </section>
-    <section id="user-panel" class="display">
+    <section id="user-panel" class="">
       <div class="main-container">
         <h2>Welcome, <span id="user"></span></h2>
         <div>

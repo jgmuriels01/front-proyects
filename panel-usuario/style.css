@@ -24,6 +24,17 @@ section{
     display: none;
 }
 
+/* ERROR */
+.error{
+    border: 2px solid var(--color-red)
+}
+
+.errorMessage{
+    font-size: 80%;
+    color: var(--color-red);
+    position: relative;
+    bottom: 5px;
+}
 
 * {
     margin: 0;
@@ -45,6 +56,13 @@ body{
     justify-content: center;
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 footer{
     position: fixed;
     bottom: 0px;
@@ -60,7 +78,7 @@ footer{
 /* Containers */
 .main-container{
     border: 2px solid var(--color-dark-grey);
-    border-radius: 5px;
+    border-radius: 10px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -119,9 +137,18 @@ a{
     margin: 5px;
 }
 
+a:hover{
+    text-decoration: underline;
+}
+
 button{
     border-radius: 5px;
     margin: 5px;
     padding: 5px;
     min-width: 100px;
+}
+
+button:disabled{
+    background-color: var(--color-light-grey);
+    color: var(--color-dark-grey);
 }
