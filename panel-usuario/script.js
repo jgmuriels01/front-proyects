@@ -5,8 +5,8 @@ import { changeUser, changePassword, changePhone, changePostalCode, changeLegalA
 /* LOGIN */
 /* get elements */
 let loginScene = document.getElementById('login')
-let userElement = loginScene.querySelector('#userLogin')
-let passwordElement = loginScene.querySelector('#passwordLogin')
+let userLoginElement = loginScene.querySelector('#userLogin')
+let passwordLoginElement = loginScene.querySelector('#passwordLogin')
 let userMessageElement = loginScene.querySelector('#userMessage')
 let passwordMessageElement = loginScene.querySelector('#passwordMessage')
 let loginButtonElement = loginScene.querySelector('#loginButton')
@@ -16,12 +16,13 @@ let visibilityElement = loginScene.querySelector('#loginVisibility')
 let visibilityLogin = false;
 
 loginButtonElement.addEventListener('click', () => {
-    if (checkCredentials(userElement, userMessageElement, passwordElement, passwordMessageElement)) {
-        //go to user-panel
+    if (checkCredentials(userLoginElement, userMessageElement, passwordLoginElement, passwordMessageElement)) {
+        document.cookie = `user:${userLoginElement.value},max-age=` + 60 * 60 * 24
+        showScene('user-panel')
     }
 })
 
-visibilityElement.addEventListener('click', () => { visibilityLogin = toggleVisibility(visibilityLogin, visibilityElement, passwordElement) })
+visibilityElement.addEventListener('click', () => { visibilityLogin = toggleVisibility(visibilityLogin, visibilityElement, passwordLoginElement) })
 
 signupLinkElement.addEventListener('click', () => showScene('sigup'))
 
@@ -123,12 +124,21 @@ signupButtonElement.addEventListener('click', () => {
         }
         localStorage.setItem(userSignupElement.value, JSON.stringify(user))
     }
-    let userString = localStorage.getItem(userSignupElement.innerText)
+    let userString = localStorage.getItem(userSignupElement.value)
     let userObj = JSON.parse(userString)
     console.log(userObj.password)
     console.log(userObj.phone)
     console.log(userObj.postalCode)
     console.log(userObj.age)
+    showScene('login')
 })
 
 loginLinkElement.addEventListener('click', () => showScene('login'))
+
+/* USER PANEL */
+let userPanelElement = document.getElementById('user-panel')
+let userElement = userPanelElement.querySelector('#user')
+
+document.
+
+
