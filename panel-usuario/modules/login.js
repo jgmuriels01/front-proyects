@@ -1,41 +1,28 @@
-import { REGEX_USER, REGEX_PASSWORD } from '../utils/regex.js'
-
-function checkUser(user) {
-    return REGEX_USER.test(user)
-}
-
-export function changeUser(userInput, userMessage) {
-    if (checkUser(userInput.value)) {
+export function checkCredentials(userInput, userMessage, passwordInput, passwordMessage){
+    let passwordStored = localStorage.getItem(userInput.innerText)
+    if(passwordInput.innerText === passwordStored){
         userInput.classList.remove('error')
         userMessage.innerHTML = ''
-        return true
-    } else {
-        userInput.classList.add('error')
-        userMessage.innerHTML = 'Min 3 character long'
-        return false
-    }
-}
-
-function checkPassword(password) {
-    return REGEX_PASSWORD.test(password)
-}
-
-export function changePassword(passwordInput, passwordMessage) {
-    if (checkPassword(passwordInput.value)) {
         passwordInput.classList.remove('error')
         passwordMessage.innerHTML = ''
         return true
-    } else {
+    }else{
+        userInput.classList.add('error')
+        userMessage.innerHTML = 'User not found or password not matching'
         passwordInput.classList.add('error')
-        passwordMessage.innerHTML = 'Min 8 character long, upper and lower'
+        passwordMessage.innerHTML = 'User not found or password not matching'
         return false
     }
 }
 
-export function validLogin(user, password){
-    if(user && password){
-        return true
+export function toggleVisibility(visibility, visibilityElement, passwordElement){
+    if(visibility){
+        passwordElement.setAttribute('type', 'password')
+        visibilityElement.innerText = 'visibility_off'
     }else{
-        return false
+        passwordElement.setAttribute('type', 'text')
+        visibilityElement.innerText = 'visibility'
+
     }
+    return !visibility
 }

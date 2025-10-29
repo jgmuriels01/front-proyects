@@ -9,14 +9,14 @@
 }
 
 /* IMPORTANT */
-section.display{
+section.active{
     display: block;
 }
 section{
     display: none;
 }
 
-#age-container.display{
+#age-container.active{
     display: block;
 }
 
