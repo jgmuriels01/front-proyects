@@ -1,6 +1,7 @@
 import { checkCredentials, toggleVisibility } from './modules/login.js'
 import { showScene } from './utils/scene.js'
 import { changeUser, changePassword, changePhone, changePostalCode, changeLegalAge, changeAge, validSignup } from './modules/signup.js'
+import { getCookie, cookieSetMaxAge } from './utils/cookies.js'
 
 /* LOGIN */
 /* get elements */
@@ -17,8 +18,11 @@ let visibilityLogin = false;
 
 loginButtonElement.addEventListener('click', () => {
     if (checkCredentials(userLoginElement, userMessageElement, passwordLoginElement, passwordMessageElement)) {
-        document.cookie = `user:${userLoginElement.value},max-age=` + 60 * 60 * 24
+        document.cookie = `user=${userLoginElement.value}`
+        cookieSetMaxAge('user', 60*60*24)
         showScene('user-panel')
+        
+        
     }
 })
 
@@ -138,7 +142,8 @@ loginLinkElement.addEventListener('click', () => showScene('login'))
 /* USER PANEL */
 let userPanelElement = document.getElementById('user-panel')
 let userElement = userPanelElement.querySelector('#user')
+let themeElement = userPanelElement.querySelector('#theme')
+let signoutElement = userPanelElement.querySelector('#signout')
 
-document.
 
 

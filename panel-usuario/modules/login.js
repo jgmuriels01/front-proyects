@@ -1,6 +1,7 @@
 export function checkCredentials(userInput, userMessage, passwordInput, passwordMessage){
-    let passwordStored = localStorage.getItem(userInput.innerText)
-    if(passwordInput.innerText === passwordStored){
+    let userObjString = localStorage.getItem(userInput.value)
+    let userObj = JSON.parse(userObjString)
+    if(passwordInput.value === userObj.password){
         userInput.classList.remove('error')
         userMessage.innerHTML = ''
         passwordInput.classList.remove('error')
