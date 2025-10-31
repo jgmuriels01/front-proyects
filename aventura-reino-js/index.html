@@ -5,6 +5,9 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='style.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <script type="module" src='script.js' defer></script>
     <title>Aventura en el Reino de JS</title>
 </head>
@@ -16,20 +19,24 @@
     <main>
         <div id="scene-player" class="scene">
             <div id="scene-player-container">
-                <div>
+                <div id="player-name-container">
                     <img class="player-img" alt="player-img">
                     <div class="player-name"></div>
                 </div>
                 <div class="player-stats"></div>
-                <button id="player-continue">Continuar</button>
+                <div class="button-container">
+                    <button id="player-continue">Continuar</button>
+                </div>
             </div>
         </div>
         <div id="scene-shop" class="scene">
-            <h2>Mercado</h2>
-            <h3>¡Hoy <span id="discount"></span>% de descuento en objetos <span id="rarity"></span>!</h3>
             <div id="scene-shop-container">
+                <h2>Mercado</h2>
+                <h3>¡Hoy <span id="discount"></span>% de descuento en objetos <span id="rarity"></span>!</h3>
                 <div id="shop"></div>
-                <button id="shop-continue">Continuar</button>
+                <div class="button-container">
+                    <button id="shop-continue">Continuar</button>
+                </div>
             </div>
         </div>
         <div id="scene-player-inventory" class="scene">
