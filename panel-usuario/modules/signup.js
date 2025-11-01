@@ -38,10 +38,12 @@ function checkPassword(password) {
     return REGEX_PASSWORD.test(password)
 }
 
-export function resetPassword(passwordInput, passwordMessage) {
+export function resetPassword(passwordInput, passwordMessage, visbilityElement, visibility) {
     passwordInput.value = ""
     passwordInput.classList.remove('error')
     passwordMessage.innerHTML = ''
+    visbilityElement.innerText = 'visibility_off'
+    visibility = false
 }
 
 export function changePassword(passwordInput, passwordMessage) {

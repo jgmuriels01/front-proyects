@@ -31,8 +31,3 @@ export function toggleVisibility(visibility, visibilityElement, passwordElement)
     }
     return !visibility
 }
-
-export function resetLogin(userInput, passwordInput){
-    userInput.value = ""
-    passwordInput.value = ""
-}
