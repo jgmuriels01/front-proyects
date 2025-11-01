@@ -1,10 +1,9 @@
-import { checkCredentials, toggleVisibility } from './modules/login.js'
+import { checkCredentials, toggleVisibility, resetLogin } from './modules/login.js'
 import { showScene } from './utils/scene.js'
-import { changeUser, changePassword, changePhone, changePostalCode, changeLegalAge, changeAge, validSignup } from './modules/signup.js'
-import { getCookie, cookieSetMaxAge } from './utils/cookies.js'
+import { resetUser, changeUser, resetPassword, changePassword, resetPhone, changePhone, resetPostalCode, changePostalCode, resetLegalAge, changeLegalAge, resetAge, changeAge, validSignup } from './modules/signup.js'
+import { getCookie, cookieSetMaxAge, deleteCookie, cookieExist } from './utils/cookies.js'
 
-/* LOGIN */
-/* get elements */
+/* elements LOGIN */
 let loginScene = document.getElementById('login')
 let userLoginElement = loginScene.querySelector('#userLogin')
 let passwordLoginElement = loginScene.querySelector('#passwordLogin')
@@ -12,27 +11,11 @@ let userMessageElement = loginScene.querySelector('#userMessage')
 let passwordMessageElement = loginScene.querySelector('#passwordMessage')
 let loginButtonElement = loginScene.querySelector('#loginButton')
 let signupLinkElement = loginScene.querySelector('#signupLink')
-let visibilityElement = loginScene.querySelector('#loginVisibility')
+let visibilityLoginElement = loginScene.querySelector('.loginVisibility')
 
 let visibilityLogin = false;
 
-loginButtonElement.addEventListener('click', () => {
-    if (checkCredentials(userLoginElement, userMessageElement, passwordLoginElement, passwordMessageElement)) {
-        document.cookie = `user=${userLoginElement.value}`
-        cookieSetMaxAge('user', 60*60*24)
-        showScene('user-panel')
-        
-        
-    }
-})
-
-visibilityElement.addEventListener('click', () => { visibilityLogin = toggleVisibility(visibilityLogin, visibilityElement, passwordLoginElement) })
-
-signupLinkElement.addEventListener('click', () => showScene('sigup'))
-
-
-/* SIGNUP */
-/* get elements */
+/* elements SIGNUP */
 let signupScene = document.getElementById('sigup')
 let userSignupElement = signupScene.querySelector('#userSignup')
 let passwordSignupElement = signupScene.querySelector('#passwordSignup')
@@ -59,6 +42,56 @@ let postalCodeOk = false
 let legalAgeOk = false
 let ageOk = false
 
+/* elements USER PANEL */
+let userPanelElement = document.getElementById('user-panel')
+let userElement = userPanelElement.querySelector('#user')
+userElement = document.getElementById('user')
+let themeElement = userPanelElement.querySelector('#theme')
+let signoutElement = userPanelElement.querySelector('#signout')
+
+/* elements FOOTER */
+let acceptCookiesContainerElement = document.getElementById('accept-cookies-container')
+let acceptCookiesElement = acceptCookiesContainerElement.querySelector('#acceptCookies')
+acceptCookiesElement = document.getElementById('acceptCookies')
+
+/* INICIALIZATION */
+if(cookieExist('acceptCookies')){
+    acceptCookiesContainerElement.classList.remove('active')
+}else{
+    acceptCookiesContainerElement.classList.add('active')
+}
+if(cookieExist('user')){
+    userElement.innerText = getCookie('user')
+    showScene('user-panel')
+}else{
+    showScene('login')
+}
+
+/* LOGIN */
+loginButtonElement.addEventListener('click', () => {
+    if (checkCredentials(userLoginElement, userMessageElement, passwordLoginElement, passwordMessageElement)) {
+        document.cookie = `user=${userLoginElement.value}`
+        cookieSetMaxAge('user', 60 * 60 * 24)
+        userElement.innerText = getCookie('user')
+        showScene('user-panel')
+
+    }
+})
+
+visibilityLoginElement.addEventListener('click', () => { visibilityLogin = toggleVisibility(visibilityLogin, visibilityLoginElement, passwordLoginElement) })
+
+signupLinkElement.addEventListener('click', () => {
+    showScene('sigup')
+    resetUser(userSignupElement, userSignupMessageElement)
+    resetPassword(passwordSignupElement, passwordSignupMessageElement)
+    resetPhone(phoneElement, phoneMessageElement)
+    resetPostalCode(postalCodeElement, postalCodeMessageElement)
+    resetLegalAge(legalAgeElement, legalAgeMessageElement)
+    ageContainerElement.classList.remove('active')
+    resetAge(ageElement, ageMessageElement)
+})
+
+/* SIGN UP */
 userSignupElement.addEventListener('blur', () => {
     usersignupOk = changeUser(userSignupElement, userSignupMessageElement)
     if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
@@ -101,6 +134,7 @@ legalAgeElement.addEventListener('click', () => {
         ageContainerElement.classList.add('active')
     } else {
         ageContainerElement.classList.remove('active')
+        ageElement.value = ""
     }
     if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
         signupButtonElement.disabled = false
@@ -140,10 +174,18 @@ signupButtonElement.addEventListener('click', () => {
 loginLinkElement.addEventListener('click', () => showScene('login'))
 
 /* USER PANEL */
-let userPanelElement = document.getElementById('user-panel')
-let userElement = userPanelElement.querySelector('#user')
-let themeElement = userPanelElement.querySelector('#theme')
-let signoutElement = userPanelElement.querySelector('#signout')
+signoutElement.addEventListener('click', () => {
+    deleteCookie('user')
+    resetLogin(userLoginElement, passwordLoginElement)
+    showScene("login")
+})
+
+/* FOOTER */
+acceptCookiesElement.addEventListener('click', () => {
+    document.cookie = `acceptCookies=true`
+    cookieSetMaxAge('acceptCookies', 60 * 60 * 24)
+    acceptCookiesContainerElement.classList.remove('active')
+})
 
 
 

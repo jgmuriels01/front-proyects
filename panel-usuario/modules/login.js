@@ -1,29 +1,38 @@
-export function checkCredentials(userInput, userMessage, passwordInput, passwordMessage){
+export function checkCredentials(userInput, userMessage, passwordInput, passwordMessage) {
     let userObjString = localStorage.getItem(userInput.value)
-    let userObj = JSON.parse(userObjString)
-    if(passwordInput.value === userObj.password){
-        userInput.classList.remove('error')
-        userMessage.innerHTML = ''
-        passwordInput.classList.remove('error')
-        passwordMessage.innerHTML = ''
-        return true
-    }else{
+    try {
+        let userObj = JSON.parse(userObjString)
+        if (passwordInput.value === userObj.password) {
+            userInput.classList.remove('error')
+            userMessage.innerHTML = ''
+            passwordInput.classList.remove('error')
+            passwordMessage.innerHTML = ''
+            return true
+        }
+    } catch (error) {
         userInput.classList.add('error')
+        userInput.value = ""
         userMessage.innerHTML = 'User not found or password not matching'
         passwordInput.classList.add('error')
+        passwordInput.value = ""
         passwordMessage.innerHTML = 'User not found or password not matching'
         return false
     }
 }
 
-export function toggleVisibility(visibility, visibilityElement, passwordElement){
-    if(visibility){
+export function toggleVisibility(visibility, visibilityElement, passwordElement) {
+    if (visibility) {
         passwordElement.setAttribute('type', 'password')
         visibilityElement.innerText = 'visibility_off'
-    }else{
+    } else {
         passwordElement.setAttribute('type', 'text')
         visibilityElement.innerText = 'visibility'
 
     }
     return !visibility
+}
+
+export function resetLogin(userInput, passwordInput){
+    userInput.value = ""
+    passwordInput.value = ""
 }

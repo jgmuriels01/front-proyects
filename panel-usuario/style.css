@@ -24,6 +24,13 @@ section{
     display: none;
 }
 
+#accept-cookies-container.active{
+    display: block !important;
+}
+#accept-cookies-container{
+    display: none !important;
+}
+
 /* ERROR */
 .error{
     border: 2px solid var(--color-red)
@@ -75,6 +82,7 @@ footer{
     padding: 10px;
 }
 
+
 /* Containers */
 .main-container{
     border: 2px solid var(--color-dark-grey);
@@ -93,6 +101,11 @@ footer{
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.loginVisibility{
+    position: absolute;
+    right: 100px;
 }
 
 

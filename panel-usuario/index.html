@@ -6,9 +6,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='stylesheet' href='style.css'>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility_off" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=visibility" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=visibility,visibility_off" />
   <script type="module" src='script.js' defer></script>
   <title>Gestión usuario</title>
 </head>
@@ -18,30 +16,30 @@
     <section id="login" class="active">
       <div class="main-container">
         <h1>Log in</h1>
-        <input type="text" id="userLogin" placeholder="user">
+        <input type="text" id="userLogin" placeholder="user" autocomplete="on">
         <div id="userMessage" class="errorMessage"></div>
-        <div>
+        <div class="flexRowCenter">
           <input type="password" id="passwordLogin" placeholder="password">
-          <i class="material-symbols-outlined" id="loginVisibility">
-            visibility_off
-          </i>
+          <i class="material-symbols-outlined loginVisibility">visibility_off</i>
         </div>
-
         <div id="passwordMessage" class="errorMessage"></div>
         <button class="bcBlue" id="loginButton">Log in</button><br>
         <a class="cGreen" id="signupLink">Sign up</a>
       </div>
     </section>
-    <section id="sigup" class="active">
+    <section id="sigup" class="">
       <div class="main-container">
         <h1>Sign up</h1>
-        <input type="text" id="userSignup" placeholder="user">
+        <input type="text" id="userSignup" placeholder="user" autocomplete="on">
         <div id="userSignupMessage" class="errorMessage"></div>
-        <input type="text" id="passwordSignup" placeholder="password">
+        <div class="flexRowCenter">
+          <input type="text" id="passwordSignup" placeholder="password">
+          <i class="material-symbols-outlined loginVisibility">visibility_off</i>
+        </div>
         <div id="passwordsignupMessage" class="errorMessage"></div>
-        <input type="number" id="phone" placeholder="123456789">
+        <input type="number" id="phone" placeholder="123456789" autocomplete="on">
         <div id="phoneMessage" class="errorMessage"></div>
-        <input type="number" id="postal-code" placeholder="12345">
+        <input type="number" id="postal-code" placeholder="12345" autocomplete="on">
         <div id="postalCodeMessage" class="errorMessage"></div>
         <div>
           <input type="checkbox" id="legal-age">
@@ -67,8 +65,10 @@
     </section>
   </main>
   <footer>
-    <span>We use cookies to remember your preferences, agree?</span>
-    <button class="bcBlue">Accept cookies</button>
+    <div id="accept-cookies-container" class="active">
+      <span>We use cookies to remember your preferences, agree?</span>
+      <button class="bcBlue" id="acceptCookies">Accept cookies</button>
+    </div>
   </footer>
 </body>
 
