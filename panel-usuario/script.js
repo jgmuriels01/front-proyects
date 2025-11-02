@@ -2,6 +2,7 @@ import { checkCredentials, toggleVisibility,} from './modules/login.js'
 import { showScene } from './utils/scene.js'
 import { resetUser, changeUser, resetPassword, changePassword, resetPhone, changePhone, resetPostalCode, changePostalCode, resetLegalAge, changeLegalAge, resetAge, changeAge, validSignup } from './modules/signup.js'
 import { getCookie, cookieSetMaxAge, deleteCookie, cookieExist } from './utils/cookies.js'
+import { encryptPassword } from './utils/password.js'
 
 /* elements LOGIN */
 let loginScene = document.getElementById('login')
@@ -71,11 +72,12 @@ if (cookieExist('user')) {
 }
 if (cookieExist('theme') && getCookie('theme') === 'light') {
     document.body.classList.remove('dark-mode')
+    darkMode = false
 }
 
 /* LOGIN */
-loginButtonElement.addEventListener('click', () => {
-    if (checkCredentials(userLoginElement, userMessageElement, passwordLoginElement, passwordMessageElement)) {
+loginButtonElement.addEventListener('click', async () => {
+    if (await checkCredentials(userLoginElement, userMessageElement, passwordLoginElement, passwordMessageElement)) {
         document.cookie = `user=${userLoginElement.value}`
         cookieSetMaxAge('user', 60 * 60 * 24)
         userElement.innerText = getCookie('user')
@@ -86,14 +88,14 @@ loginButtonElement.addEventListener('click', () => {
 visibilityLoginElement.addEventListener('click', () => { visibilityLogin = toggleVisibility(visibilityLogin, visibilityLoginElement, passwordLoginElement) })
 
 signupLinkElement.addEventListener('click', () => {
-    showScene('sigup')
     resetUser(userSignupElement, userSignupMessageElement)
-    resetPassword(passwordSignupElement, passwordSignupMessageElement, visibilitySignupElement, visibilitySignup)
+    visibilitySignup = resetPassword(passwordSignupElement, passwordSignupMessageElement, visibilitySignupElement)
     resetPhone(phoneElement, phoneMessageElement)
     resetPostalCode(postalCodeElement, postalCodeMessageElement)
     resetLegalAge(legalAgeElement, legalAgeMessageElement)
     ageContainerElement.classList.remove('active')
     resetAge(ageElement, ageMessageElement)
+    showScene('sigup')
 })
 
 /* SIGN UP */
@@ -157,10 +159,10 @@ ageElement.addEventListener('blur', () => {
     }
 })
 
-signupButtonElement.addEventListener('click', () => {
+signupButtonElement.addEventListener('click', async () => {
     if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
         let user = {
-            password: passwordSignupElement.value,
+            password: await encryptPassword(passwordSignupElement.value),
             phone: phoneElement.value,
             postalCode: postalCodeElement.value,
             age: ageElement.value
@@ -173,7 +175,7 @@ signupButtonElement.addEventListener('click', () => {
 visibilitySignupElement.addEventListener('click', () => { visibilitySignup = toggleVisibility(visibilitySignup, visibilitySignupElement, passwordSignupElement) })
 loginLinkElement.addEventListener('click', () => {
     resetUser(userLoginElement, userMessageElement)
-    resetPassword(passwordLoginElement, passwordMessageElement, visibilityLoginElement, visibilityLogin)
+    visibilityLogin = resetPassword(passwordLoginElement, passwordMessageElement, visibilityLoginElement)
     showScene('login')
 })
 
@@ -181,7 +183,7 @@ loginLinkElement.addEventListener('click', () => {
 signoutElement.addEventListener('click', () => {
     deleteCookie('user')
     resetUser(userLoginElement, userMessageElement)
-    resetPassword(passwordLoginElement, passwordMessageElement, visibilityLoginElement, visibilityLogin)
+    visibilityLogin = resetPassword(passwordLoginElement, passwordMessageElement, visibilityLoginElement)
     showScene("login")
 })
 
