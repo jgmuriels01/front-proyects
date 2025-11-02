@@ -40,6 +40,7 @@ function checkPassword(password) {
 
 export function resetPassword(passwordInput, passwordMessage, visbilityElement, visibility) {
     passwordInput.value = ""
+    passwordInput.setAttribute('type', 'password')
     passwordInput.classList.remove('error')
     passwordMessage.innerHTML = ''
     visbilityElement.innerText = 'visibility_off'
