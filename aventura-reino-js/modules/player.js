@@ -1,5 +1,3 @@
-import { Product } from "./product.js";
-
 export class Player {
 
     constructor(name) {

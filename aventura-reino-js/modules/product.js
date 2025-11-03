@@ -30,7 +30,10 @@ export class Product {
     discount(discount) {
         if (discount < 0) { discount = 0 }
         if (discount > 100) { discount = 100 }
-        this.price = Math.round(this.price * (1 - (discount / 100))) // No decimals in prices
+        this.price = Math.round(this.price * (1 - (discount / 100)))// No decimals in prices
+        if(this.price == 0){
+            this.price = 1
+        }
     }
 
     showProduct(img) {

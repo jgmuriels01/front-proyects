@@ -1,6 +1,6 @@
 import { checkCredentials, toggleVisibility, } from './modules/login.js'
 import { showScene } from './utils/scene.js'
-import { resetUser, changeUser, resetPassword, changePassword, resetPhone, changePhone, resetPostalCode, changePostalCode, resetLegalAge, changeLegalAge, resetAge, changeAge, validSignup } from './modules/signup.js'
+import { resetUser, changeUser, resetPassword, changePassword, resetPhone, changePhone, resetPostalCode, changePostalCode, resetLegalAge, resetAge, changeAge, validSignup } from './modules/signup.js'
 import { getCookie, cookieSetMaxAge, deleteCookie, cookieExist } from './utils/cookies.js'
 import { encryptPassword } from './utils/password.js'
 
@@ -34,7 +34,6 @@ let userSignupMessageElement = signupScene.querySelector('#userSignupMessage')
 let passwordSignupMessageElement = signupScene.querySelector('#passwordsignupMessage')
 let phoneMessageElement = signupScene.querySelector('#phoneMessage')
 let postalCodeMessageElement = signupScene.querySelector('#postalCodeMessage')
-let legalAgeMessageElement = signupScene.querySelector('#legalAgeMessage')
 let ageMessageElement = signupScene.querySelector('#ageMessage')
 
 let usersignupOk = false
@@ -42,7 +41,7 @@ let passwordSignupOk = false
 let visibilitySignup = false;
 let phoneOk = false
 let postalCodeOk = false
-let legalAgeOk = false
+let legalAge = false
 let ageOk = false
 
 /* elements USER PANEL */
@@ -92,7 +91,7 @@ signupLinkElement.addEventListener('click', () => {
     visibilitySignup = resetPassword(passwordSignupElement, passwordSignupMessageElement, visibilitySignupElement)
     resetPhone(phoneElement, phoneMessageElement)
     resetPostalCode(postalCodeElement, postalCodeMessageElement)
-    resetLegalAge(legalAgeElement, legalAgeMessageElement)
+    legalAge = resetLegalAge(legalAgeElement)
     ageContainerElement.classList.remove('active')
     resetAge(ageElement, ageMessageElement)
     showScene('sigup')
@@ -101,7 +100,7 @@ signupLinkElement.addEventListener('click', () => {
 /* SIGN UP */
 userSignupElement.addEventListener('blur', () => {
     usersignupOk = changeUser(userSignupElement, userSignupMessageElement)
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         signupButtonElement.disabled = false
     } else {
         signupButtonElement.disabled = true
@@ -110,7 +109,7 @@ userSignupElement.addEventListener('blur', () => {
 
 passwordSignupElement.addEventListener('blur', () => {
     passwordSignupOk = changePassword(passwordSignupElement, passwordSignupMessageElement)
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         signupButtonElement.disabled = false
     } else {
         signupButtonElement.disabled = true
@@ -119,7 +118,7 @@ passwordSignupElement.addEventListener('blur', () => {
 
 phoneElement.addEventListener('blur', () => {
     phoneOk = changePhone(phoneElement, phoneMessageElement)
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         signupButtonElement.disabled = false
     } else {
         signupButtonElement.disabled = true
@@ -128,7 +127,7 @@ phoneElement.addEventListener('blur', () => {
 
 postalCodeElement.addEventListener('blur', () => {
     postalCodeOk = changePostalCode(postalCodeElement, postalCodeMessageElement)
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         signupButtonElement.disabled = false
     } else {
         signupButtonElement.disabled = true
@@ -136,14 +135,15 @@ postalCodeElement.addEventListener('blur', () => {
 })
 
 legalAgeElement.addEventListener('click', () => {
-    legalAgeOk = changeLegalAge(legalAgeElement, legalAgeMessageElement)
-    if (legalAgeOk) {
-        ageContainerElement.classList.add('active')
-    } else {
+    if (legalAge) {
         ageContainerElement.classList.remove('active')
+        legalAge = false
+    } else {
+        ageContainerElement.classList.add('active')
         ageElement.value = ""
+        legalAge = true
     }
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         signupButtonElement.disabled = false
     } else {
         signupButtonElement.disabled = true
@@ -151,8 +151,8 @@ legalAgeElement.addEventListener('click', () => {
 })
 
 ageElement.addEventListener('blur', () => {
-    ageOk = changeAge(ageElement, ageMessageElement)
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    ageOk = changeAge(ageElement, ageMessageElement, legalAge)
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         signupButtonElement.disabled = false
     } else {
         signupButtonElement.disabled = true
@@ -160,12 +160,12 @@ ageElement.addEventListener('blur', () => {
 })
 
 signupButtonElement.addEventListener('click', async () => {
-    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk)) {
+    if (validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk)) {
         let user = {
             password: await encryptPassword(passwordSignupElement.value),
             phone: phoneElement.value,
             postalCode: postalCodeElement.value,
-            age: ageElement.value
+            age: legalAge ? ageElement.value : null
         }
         localStorage.setItem(userSignupElement.value, JSON.stringify(user))
     }

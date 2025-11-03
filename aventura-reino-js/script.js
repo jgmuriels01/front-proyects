@@ -1,10 +1,7 @@
 import { PROPLAYER_POINTS, PLAYER, ENEMIES, FINAL_BOSSES, SHOP } from './utils/constants.js';
 import { showScene } from './utils/scene.js';
 import { showBattle } from './modules/battle.js'
-import { Enemy, FinalBoss } from './modules/enemies.js'
 import { findProduct, applyDiscount, showShop, randomRarity, randomDiscount } from './modules/shop.js'
-import { Player } from './modules/player.js'
-import { Product } from './modules/product.js'
 import { showRanking } from './modules/ranking.js'
 
 /* Init */
@@ -74,7 +71,6 @@ playerContinueButtonElement.addEventListener("click", () => {
             }
             footerInventoryItemElements.forEach(item => item.innerHTML = "")
             PLAYER.showInventory(footerInventoryItemElements)
-            console.log(PLAYER.inventory.length)
         })
     })
 })

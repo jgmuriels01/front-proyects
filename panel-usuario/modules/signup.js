@@ -103,22 +103,9 @@ export function changePostalCode(postalCodeInput, postalCodeMessage) {
     }
 }
 
-export function resetLegalAge(legalAgeInput, legalAgeMessage) {
+export function resetLegalAge(legalAgeInput) {
     legalAgeInput.checked = false
-    legalAgeInput.classList.remove('error')
-    legalAgeMessage.innerHTML = ''
-}
-
-export function changeLegalAge(legalAgeInput, legalAgeMessage) {
-    if (legalAgeInput.checked) {
-        legalAgeInput.classList.remove('error')
-        legalAgeMessage.innerHTML = ''
-        return true
-    } else {
-        legalAgeInput.classList.add('error')
-        legalAgeMessage.innerHTML = 'Not allowed under 18'
-        return false
-    }
+    return false
 }
 
 export function resetAge(ageInput, ageMessage) {
@@ -127,18 +114,19 @@ export function resetAge(ageInput, ageMessage) {
     ageMessage.innerHTML = ''
 }
 
-export function changeAge(ageInput, ageMessage) {
-    if (ageInput.value >= 18 && ageInput.value < 100) {
-        ageInput.classList.remove('error')
-        ageMessage.innerHTML = ''
-        return true
-    } else {
-        ageInput.classList.add('error')
-        ageMessage.innerHTML = 'Age between 18 and 99'
-        return false
+export function changeAge(ageInput, ageMessage, legalAge) {
+    if (legalAge) {
+        if (ageInput.value >= 18 && ageInput.value < 100) {
+            ageInput.classList.remove('error')
+            ageMessage.innerHTML = ''
+            return true
+        }
     }
+    ageInput.classList.add('error')
+    ageMessage.innerHTML = 'Age between 18 and 99'
+    return false
 }
 
-export function validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAgeOk, ageOk) {
-    return usersignupOk && passwordSignupOk && phoneOk && postalCodeOk && legalAgeOk && ageOk
+export function validSignup(usersignupOk, passwordSignupOk, phoneOk, postalCodeOk, legalAge, ageOk) {
+    return usersignupOk && passwordSignupOk && phoneOk && postalCodeOk && (!legalAge || (legalAge && ageOk))
 }

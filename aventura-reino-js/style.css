@@ -98,6 +98,7 @@ footer {
 
 
 #scene-player-inventory {
+    background-color: #b86e14;
     img {
         width: 150px;
     }
@@ -156,6 +157,7 @@ footer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    background-color: #b86e14;
 
     img {
         width: 150px;
@@ -176,7 +178,9 @@ footer {
     }
 }
 
-
+#scene-ranking-container{
+    background-color: #b86e14;
+}
 
 
 
