@@ -1,4 +1,4 @@
-import { checkCredentials, toggleVisibility,} from './modules/login.js'
+import { checkCredentials, toggleVisibility, } from './modules/login.js'
 import { showScene } from './utils/scene.js'
 import { resetUser, changeUser, resetPassword, changePassword, resetPhone, changePhone, resetPostalCode, changePostalCode, resetLegalAge, changeLegalAge, resetAge, changeAge, validSignup } from './modules/signup.js'
 import { getCookie, cookieSetMaxAge, deleteCookie, cookieExist } from './utils/cookies.js'
@@ -169,6 +169,8 @@ signupButtonElement.addEventListener('click', async () => {
         }
         localStorage.setItem(userSignupElement.value, JSON.stringify(user))
     }
+    resetUser(userLoginElement, userMessageElement)
+    visibilityLogin = resetPassword(passwordLoginElement, passwordMessageElement, visibilityLoginElement)
     showScene('login')
 })
 

@@ -128,7 +128,7 @@ export function resetAge(ageInput, ageMessage) {
 }
 
 export function changeAge(ageInput, ageMessage) {
-    if (ageInput.value >= 18 && ageInput.value <= 100) {
+    if (ageInput.value >= 18 && ageInput.value < 100) {
         ageInput.classList.remove('error')
         ageMessage.innerHTML = ''
         return true
