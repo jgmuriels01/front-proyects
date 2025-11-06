@@ -62,6 +62,7 @@ section {
     padding: 5px;
     width: 100%;
     position: relative;
+    min-height: 35px;
 }
 
 .tablero .card .card-text{
