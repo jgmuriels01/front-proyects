@@ -1,4 +1,7 @@
-/* add new card */
+/* ADD NEW CARD */
+/* create a container to add a new card,
+add listener to on click be replaced by the container
+of creating a new card */
 function createAddNewCard(parent) {
     let addNewCardElement = document.createElement('div')
     addNewCardElement.classList.add('add-new-card')
@@ -7,13 +10,17 @@ function createAddNewCard(parent) {
     return addNewCardElement
 }
 
+/* add listener to be replace on click for a container
+to add a new card */
 export function addNewCardListener(node, parent) {
     node.addEventListener('click', () => {
         node.replaceWith(createNewCard(parent))
     })
 }
 
-/* new card */
+/* NEW CARD */
+/* create the container to create a new card and
+add two listeners*/
 function createNewCard(parent) {
     let newCardElement = document.createElement('div')
     newCardElement.classList.add('new-card')
@@ -31,7 +38,7 @@ function createNewCard(parent) {
     saveNewCardElement.innerText = 'Añadir tarjeta'
     newCardFooterElement.append(saveNewCardElement)
     let cancelNewCardElement = document.createElement('span')
-    cancelNewCardElement.classList.add('cancel-card-footer')
+    cancelNewCardElement.classList.add('cancel-new-card')
     cancelNewCardElement.classList.add('material-symbols-outlined')
     cancelNewCardElement.innerText = 'close'
     newCardFooterElement.append(cancelNewCardElement)
@@ -41,6 +48,9 @@ function createNewCard(parent) {
     return newCardElement
 }
 
+/* add two events:
+- on click, save: create card and container to add a new card
+- on click, cancel: transform create card container back to add new card */
 function newCardListeners(node, parent) {
     let textareaElement = node.querySelector('textarea')
     let saveNewCardElement = node.querySelector('.save-new-card')
@@ -48,13 +58,14 @@ function newCardListeners(node, parent) {
         node.replaceWith(createCard(textareaElement.value))
         parent.append(createAddNewCard(parent)) /* cant append before node exist in the DOM !!! */
     })
-    let cancelNewCardElement = node.querySelector('.cancel-card-footer')
+    let cancelNewCardElement = node.querySelector('.cancel-new-card')
     cancelNewCardElement.addEventListener('click', () => {
         node.replaceWith(createAddNewCard(parent))
     })
 }
 
-/* card */
+/* CARD */
+/* create a card and add listener to remove it*/
 function createCard(text) {
     let cardElement = document.createElement('div')
     cardElement.classList.add('card')
