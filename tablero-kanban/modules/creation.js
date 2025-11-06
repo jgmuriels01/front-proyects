@@ -1,4 +1,20 @@
-export function createNewCard() {
+/* add new card */
+function createAddNewCard(parent) {
+    let addNewCardElement = document.createElement('div')
+    addNewCardElement.classList.add('add-new-card')
+    addNewCardElement.innerText = '+ Añade una tarjeta'
+    addNewCardListener(addNewCardElement, parent)
+    return addNewCardElement
+}
+
+export function addNewCardListener(node, parent) {
+    node.addEventListener('click', () => {
+        node.replaceWith(createNewCard(parent))
+    })
+}
+
+/* new card */
+function createNewCard(parent) {
     let newCardElement = document.createElement('div')
     newCardElement.classList.add('new-card')
     /* new-card-title */
@@ -21,37 +37,24 @@ export function createNewCard() {
     newCardFooterElement.append(cancelNewCardElement)
     /* new-card-footer append */
     newCardElement.append(newCardFooterElement)
-    newCardListeners(newCardElement)
+    newCardListeners(newCardElement, parent)
     return newCardElement
 }
 
-export function newCardListeners(node) {
+function newCardListeners(node, parent) {
     let textareaElement = node.querySelector('textarea')
     let saveNewCardElement = node.querySelector('.save-new-card')
     saveNewCardElement.addEventListener('click', () => {
         node.replaceWith(createCard(textareaElement.value))
-        node.parentElement.append(createAddNewCard()) /* cant append before node exist in the DOM !!! */
+        parent.append(createAddNewCard(parent)) /* cant append before node exist in the DOM !!! */
     })
     let cancelNewCardElement = node.querySelector('.cancel-card-footer')
     cancelNewCardElement.addEventListener('click', () => {
-        node.replaceWith(createAddNewCard())
+        node.replaceWith(createAddNewCard(parent))
     })
 }
 
-export function createAddNewCard() {
-    let addNewCardElement = document.createElement('div')
-    addNewCardElement.classList.add('add-new-card')
-    addNewCardElement.innerText = '+ Añade una tarjeta'
-    addNewCardListener(addNewCardElement)
-    return addNewCardElement
-}
-
-export function addNewCardListener(node) {
-    node.addEventListener('click', () => {
-        node.replaceWith(createNewCard())
-    })
-}
-
+/* card */
 function createCard(text) {
     let cardElement = document.createElement('div')
     cardElement.classList.add('card')
@@ -64,7 +67,7 @@ function createCard(text) {
     deleteCardElement.classList.add('delete-card')
     deleteCardElement.classList.add('material-symbols-outlined')
     deleteCardElement.innerText = 'close'
+    deleteCardElement.addEventListener('click', () => cardElement.remove())
     cardElement.append(deleteCardElement)
     return cardElement
-
 }
