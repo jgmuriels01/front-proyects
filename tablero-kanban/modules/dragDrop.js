@@ -29,7 +29,19 @@ function receiveDrop(node) {
         e.preventDefault()
         const id = e.dataTransfer.getData('text/plain');
         const element = document.getElementById(id);
-        e.currentTarget.appendChild(element);
+        console.log('target:',e.target)
+        console.log('currentTarget:',e.currentTarget)
+        console.log('element:',element)
+        console.log('e:',e)
+        if(e.target.classList.contains('card-text')){
+            console.log('a')
+            node.insertBefore(element, e.target.parentElement);
+            
+        }else{
+            console.log('b')
+            node.appendChild(element);
+        }
+        
     });
 }
 
