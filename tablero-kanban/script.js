@@ -1,12 +1,16 @@
 import { addNewCardListener } from "./modules/creation.js"
-import { prepareDropArea, prepareDragElement } from "./modules/dragDrop.js"
+import { prepareDropArea, prepareDragElement, dropAreaEffect } from "./modules/dragDrop.js"
 
 let card_id = 1
 let hover = null
 
 /* INIT */
 let addNewCardElements = document.querySelectorAll('.add-new-card')
-addNewCardElements.forEach(e => addNewCardListener(e, e.parentElement))
+addNewCardElements.forEach(e => {
+    addNewCardListener(e, e.parentElement)
+    prepareDropArea(e)
+    dropAreaEffect(e)
+})
 
 let tableroDragDropElements = document.querySelectorAll('.tablero-drag-drop')
 tableroDragDropElements.forEach(e => prepareDropArea(e))
@@ -21,13 +25,6 @@ let cardElements = document.querySelectorAll('.card')
 cardElements.forEach(e => {
     e.querySelector('.delete-card').addEventListener('click', () => e.remove())
     prepareDragElement(e)
-    e.addEventListener('dragover', () => e.style.border = '2px solid red')
-    e.addEventListener('dragleave', () => e.style.border = '')
-    e.addEventListener('dragend', () => e.style.border = '')
-})
-
-tableroDragDropElements.forEach(e => {
-    e.addEventListener('dragover', () => e.style.border = '2px solid red')
-    e.addEventListener('dragleave', () => e.style.border = '')
+    dropAreaEffect(e)
 })
 

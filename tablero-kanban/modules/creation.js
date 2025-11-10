@@ -1,4 +1,4 @@
-import { prepareDropArea, prepareDragElement } from "./dragDrop.js"
+import { prepareDropArea, prepareDragElement, dropAreaEffect } from "./dragDrop.js"
 
 /* ADD NEW CARD */
 /* create a container to add a new card,
@@ -9,6 +9,8 @@ function createAddNewCard(parent) {
     addNewCardElement.classList.add('add-new-card')
     addNewCardElement.innerText = '+ Añade una tarjeta'
     addNewCardListener(addNewCardElement, parent)
+    prepareDropArea(addNewCardElement)
+    dropAreaEffect(addNewCardElement)
     return addNewCardElement
 }
 
@@ -88,6 +90,7 @@ function createCard(text) {
         cardElement.remove()
     })
     prepareDragElement(cardElement)
+    dropAreaEffect(cardElement)
     cardElement.append(deleteCardElement)
     return cardElement
 }
