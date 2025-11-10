@@ -1,3 +1,5 @@
+import { prepareDropArea, prepareDragElement } from "./dragDrop.js"
+
 /* ADD NEW CARD */
 /* create a container to add a new card,
 add listener to on click be replaced by the container
@@ -55,8 +57,9 @@ function newCardListeners(node, parent) {
     let textareaElement = node.querySelector('textarea')
     let saveNewCardElement = node.querySelector('.save-new-card')
     saveNewCardElement.addEventListener('click', () => {
-        node.replaceWith(createCard(textareaElement.value))
-        parent.append(createAddNewCard(parent)) /* cant append before node exist in the DOM !!! */
+        let dragDropParentElement = parent.querySelector(".tablero-drag-drop")
+        dragDropParentElement.append(createCard(textareaElement.value))
+        node.replaceWith(createAddNewCard(parent))
     })
     let cancelNewCardElement = node.querySelector('.cancel-new-card')
     cancelNewCardElement.addEventListener('click', () => {
@@ -65,10 +68,13 @@ function newCardListeners(node, parent) {
 }
 
 /* CARD */
+let card_id = 1
 /* create a card and add listener to remove it*/
 function createCard(text) {
     let cardElement = document.createElement('div')
     cardElement.classList.add('card')
+    cardElement.id = card_id ++
+    cardElement.draggable = true
     /* card-text & delete-card */
     let cardTextElement = document.createElement('div')
     cardTextElement.classList.add('card-text')
@@ -78,7 +84,10 @@ function createCard(text) {
     deleteCardElement.classList.add('delete-card')
     deleteCardElement.classList.add('material-symbols-outlined')
     deleteCardElement.innerText = 'close'
-    deleteCardElement.addEventListener('click', () => cardElement.remove())
+    deleteCardElement.addEventListener('click', () => {
+        cardElement.remove()
+    })
+    prepareDragElement(cardElement)
     cardElement.append(deleteCardElement)
     return cardElement
 }
