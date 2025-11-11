@@ -23,10 +23,23 @@ function receiveDrop(node) {
 }
 
 export function dropAreaEffect(node) {
-    node.addEventListener('dragover', () => node.style.boxShadow = '0 -6px 15px -4px var(--color-dark-blue)')
-    node.addEventListener('dragleave', () => node.style.boxShadow = '')
-    node.addEventListener('dragend', () => node.style.boxShadow = '')
-    node.addEventListener('drop', () => node.style.boxShadow = '')
+    node.addEventListener('dragover', () => {
+        node.style.transition = 'all 0.5s ease'
+        node.style.boxShadow = '0 -6px 15px -4px var(--color-dark-blue)'
+        node.style.transform = 'translateY(5px)';
+    })
+    node.addEventListener('dragleave', () => {
+        node.style.boxShadow = ''
+        node.style.transform = '';
+    })
+    node.addEventListener('dragend', () => {
+        node.style.boxShadow = ''
+        node.style.transform = '';
+    })
+    node.addEventListener('drop', () => {
+        node.style.boxShadow = ''
+        node.style.transform = '';
+    })
 }
 
 export function prepareDropArea(node) {
@@ -42,6 +55,7 @@ export function prepareDragElement(node) {
         node.style.backgroundColor = 'var(--color-white)'
     });
     node.addEventListener('dragend', () => {
-        node.style.opacity = '1';
+        node.style.opacity = ''
+        node.style.backgroundColor = ''
     });
 }
