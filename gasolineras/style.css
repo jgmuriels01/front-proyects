@@ -11,3 +11,30 @@
 * {
     box-sizing: border-box;
 }
+
+body{}
+
+#search-panel{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 200px;
+}
+
+#search-panel select{
+    margin-bottom: 10px;
+}
+
+#gasolineras{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    width: 600px;
+}
+
+.gasolinera{
+    border: 2px solid var(--color-light-grey);
+    padding: 10px;
+    border-radius: 20px;
+}
