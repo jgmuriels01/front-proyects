@@ -156,7 +156,7 @@ a:hover{
 
 button{
     border-radius: 5px;
-    margin: 5px;
+    margin-top: 20px;
     padding: 5px;
     min-width: 100px;
 }
@@ -164,4 +164,18 @@ button{
 button:disabled{
     background-color: var(--color-light-grey);
     color: var(--color-dark-grey);
+}
+
+/* Labels */
+label{
+    font-weight: bold;
+}
+.placeholder{
+    color: var(--color-light-grey);
+    font-size: 12px;
+}
+
+.label-info{
+    width: 90%;
+    margin-top: 15px;
 }
