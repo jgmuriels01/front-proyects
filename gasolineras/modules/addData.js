@@ -1,4 +1,4 @@
-import { fetchProvincias, fetchMunicipios, fetchCombustibles, fetchGasolineras } from "./gasolineras.js";
+import { fetchProvincias, fetchMunicipios, fetchCombustibles, fetchGasolineras, fetchGasolinerasFecha } from "./gasolineras.js";
 
 /* PROVINCIA */
 export async function addProvincias(node) {
@@ -49,8 +49,13 @@ function renderCombustible(combustible) {
 }
 
 /* GASOLINERAS */
-export async function addGasolineras(node, IDMunicipio, IDProducto) {
-    let data = await fetchGasolineras(IDMunicipio, IDProducto)
+export async function addGasolineras(node, IDMunicipio, IDProducto, open, fecha) {
+    let data
+    if (open) {
+        data = await fetchGasolinerasFecha(fecha, IDMunicipio, IDProducto)
+    } else {
+        data = await fetchGasolineras(IDMunicipio, IDProducto)
+    }
     node.innerHTML = ''
     console.log('ACCEDIENDO A GASOLINERAS')
     data.ListaEESSPrecio.forEach(e => {

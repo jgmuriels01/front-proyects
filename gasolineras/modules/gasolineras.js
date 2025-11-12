@@ -1,4 +1,4 @@
-import { urlProvincias, urlMunicipiosParcial, urlCombustiblesParcial, urlGasolinerasParcial } from "../utils/constants.js"
+import { urlProvincias, urlMunicipiosParcial, urlCombustiblesParcial, urlGasolinerasParcial, urlGasolinerasFechaParcial } from "../utils/constants.js"
 
 /* PROVINCIA */
 export async function fetchProvincias(){
@@ -27,6 +27,14 @@ export async function fetchCombustibles(){
 /* GASOLINERAS */
 export async function fetchGasolineras(IDMunicipio, IDProducto){
     let dataJSON = await fetch(urlGasolinerasParcial + IDMunicipio + "/" + IDProducto)
+    let data = await dataJSON.json()
+    console.log(data)
+    console.log(data.ListaEESSPrecio)
+    return data
+}
+
+export async function fetchGasolinerasFecha(fecha, IDMunicipio, IDProducto){
+    let dataJSON = await fetch(urlGasolinerasFechaParcial + fecha + "/" + IDMunicipio + "/" + IDProducto)
     let data = await dataJSON.json()
     console.log(data)
     console.log(data.ListaEESSPrecio)
