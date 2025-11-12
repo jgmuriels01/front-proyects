@@ -51,6 +51,7 @@ function renderCombustible(combustible) {
 /* GASOLINERAS */
 export async function addGasolineras(node, IDMunicipio, IDProducto, open, fecha) {
     let data
+    node.innerHTML = '<div class=\'cargando\'>Cargando...</div>'
     if (open) {
         data = await fetchGasolinerasFecha(fecha, IDMunicipio, IDProducto)
     } else {
@@ -58,10 +59,14 @@ export async function addGasolineras(node, IDMunicipio, IDProducto, open, fecha)
     }
     node.innerHTML = ''
     console.log('ACCEDIENDO A GASOLINERAS')
-    data.ListaEESSPrecio.forEach(e => {
-        console.log('pintando GASOLINERA')
-        node.append(renderGasolinera(e))
-    });
+    if (data.ListaEESSPrecio.length > 0) {
+        data.ListaEESSPrecio.forEach(e => {
+            console.log('pintando GASOLINERA')
+            node.append(renderGasolinera(e))
+        })
+    }else{
+        node.innerHTML = '<div class=\'cargando\'>Sin resultados</div>'
+    }
 }
 
 function renderGasolinera(gasolinera) {

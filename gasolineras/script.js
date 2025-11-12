@@ -67,9 +67,10 @@ openElement.addEventListener('change', () => {
     gasolinerasElement.innerHTML = ''
 })
 
-buscarElement.addEventListener('click', () => {
-    fetchGasolineras(municipio, combustible)
-    addGasolineras(gasolinerasElement, municipio, combustible, open, getFormatedDate())
+buscarElement.addEventListener('click', async () => {
+    
+    await fetchGasolineras(municipio, combustible)
+    await addGasolineras(gasolinerasElement, municipio, combustible, open, getFormatedDate())
 })
 
 /* TESTING */

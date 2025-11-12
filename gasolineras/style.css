@@ -12,29 +12,98 @@
     box-sizing: border-box;
 }
 
-body{}
+body {
+    background-color: var(--color-black);
+}
 
-#search-panel{
+#title {
+    color: var(--color-white);
+    justify-self: center;
+    font-size: 72px;
+}
+
+main {
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    width: 80vw;
+}
+
+#search-panel {
     display: flex;
     flex-direction: column;
     gap: 2px;
     width: 200px;
+    background-color: var(--color-green);
+    padding: 10px;
+    color: var(--color-black);
+    border-radius: 10px;
+    position: absolute;
+    left: 20px;
 }
 
-#search-panel select{
+#search-panel label {
+    font-weight: bold;
+}
+
+#search-panel select {
     margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
 }
 
-#gasolineras{
+#gasolineras {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-    width: 600px;
+    width: 40vw;
+    background-color: var(--color-light-grey);
+    border-radius: 20px;
 }
 
-.gasolinera{
-    border: 2px solid var(--color-light-grey);
+.gasolinera {
+    border: 2px solid var(--color-black);
     padding: 10px;
     border-radius: 20px;
+    margin: 10px;
+}
+
+#buscar {
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    background-color: var(--color-blue);
+    font-weight: bold;
+}
+
+#buscar:disabled {
+    background-color: var(--color-light-grey);
+
+}
+
+.cargando {
+    font-size: 36px;
+    color: var(--color-blue);
+    background-color: var(--color-black);
+    width: 100%;
+    text-align: center;
+    padding-top: 50px;
+}
+
+@media (max-width:1200px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #search-panel {
+        position: static;
+    }
+
+    .cargando {
+        text-align: center;
+    }
 }
