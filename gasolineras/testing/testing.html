@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='es'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <script type="module" src='testing-fecha.js' defer></script>
+  <title>Gasolineras - Testing</title>
+</head>
+
+<body>
+  <h1 id="title">Gasolineras - Testing</h1>
+  <main>
+    <section id="search-panel">
+      <label>Provincia</label>
+      <select name="provincias" id="provincias">
+        <option selected disabled>--Seleccionar--</option>
+      </select>
+      <label>Municipio</label>
+      <select name="municipios" id="municipios">
+        <option selected disabled>--Seleccionar--</option>
+      </select>
+      <label>Tipo de combustible</label>
+      <select name="combustibles" id="combustibles">
+        <option selected disabled>--Seleccionar--</option>
+      </select>
+      <div>
+        <input type="checkbox" name="open" id="open">
+        <label>Gasolineras abiertas</label>
+      </div>
+      <button id="buscar" disabled>Buscar</button>
+    </section>
+    <section id="gasolineras"></section>
+  </main>
+</body>
+
+</html>

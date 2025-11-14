@@ -1,4 +1,5 @@
-import { fetchProvincias, fetchMunicipios, fetchCombustibles, fetchGasolineras, fetchGasolinerasFecha } from "./gasolineras.js";
+import { fetchProvincias, fetchMunicipios, fetchCombustibles, fetchGasolineras } from "./gasolineras.js";
+import { intervalsOk } from "../modules/fecha.js"
 
 /* PROVINCIA */
 export async function addProvincias(node) {
@@ -49,35 +50,38 @@ function renderCombustible(combustible) {
 }
 
 /* GASOLINERAS */
-export async function addGasolineras(node, IDMunicipio, IDProducto, open, fecha) {
+export async function addGasolineras(node, IDMunicipio, IDProducto, open) {
     let data
     node.innerHTML = '<div class=\'cargando\'>Cargando...</div>'
-    if (open) {
-        data = await fetchGasolinerasFecha(fecha, IDMunicipio, IDProducto)
-    } else {
-        data = await fetchGasolineras(IDMunicipio, IDProducto)
-    }
+
+    data = await fetchGasolineras(IDMunicipio, IDProducto)
+
     node.innerHTML = ''
     console.log('ACCEDIENDO A GASOLINERAS')
     if (data.ListaEESSPrecio.length > 0) {
+        let now = new Date()
         data.ListaEESSPrecio.forEach(e => {
-            console.log('pintando GASOLINERA')
-            node.append(renderGasolinera(e))
+            if (open && !intervalsOk(now, e.Horario)) {
+                console.log('GASOLINERA cerrada')
+            } else {
+                console.log('pintando GASOLINERA')
+                node.append(renderGasolinera(e, now))
+            }
         })
-    }else{
+    } else {
         node.innerHTML = '<div class=\'cargando\'>Sin resultados</div>'
     }
 }
 
-function renderGasolinera(gasolinera) {
+function renderGasolinera(gasolinera, fecha) {
     let gasolineraElement = document.createElement('div')
     gasolineraElement.classList.add('gasolinera')
     gasolineraElement.innerHTML = `
         <div class="gasolinera-nombre">Gasolinera num.${gasolinera.IDEESS}, ${gasolinera.Rótulo}</div>
         <div class="gasolinera-direccion">Dirección: ${gasolinera.Dirección}</div>
         <div class="gasolinera-localidad">Localidad: ${gasolinera.Localidad}</div>
-        <div class="gasolinera-provincia">Provincia: ${gasolinera.Provincia}</div>
-        <div class="gasolinera-horario">Horario: ${gasolinera.Horario}</div>
+        <div class="gasolinera-provincia ">Provincia: ${gasolinera.Provincia}</div>
+        <div class="gasolinera-horario ${!intervalsOk(fecha, gasolinera.Horario) ? 'cRed' : ''}">Horario: ${gasolinera.Horario}</div>
         <div class="gasolinera-precio">Precio: ${gasolinera.PrecioProducto} Euro</div>
     `
     return gasolineraElement

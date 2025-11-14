@@ -59,12 +59,13 @@ main {
     display: flex;
     flex-direction: column;
     width: 40vw;
-    background-color: var(--color-light-grey);
+    background-color: var(--color-green);
     border-radius: 20px;
 }
 
 .gasolinera {
     border: 2px solid var(--color-black);
+    background-color: var(--color-white);
     padding: 10px;
     border-radius: 20px;
     margin: 10px;
@@ -90,6 +91,10 @@ main {
     width: 100%;
     text-align: center;
     padding-top: 50px;
+}
+
+.cRed{
+    color: var(--color-red);
 }
 
 @media (max-width:1200px) {
