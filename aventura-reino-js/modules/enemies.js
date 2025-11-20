@@ -8,6 +8,10 @@ export class Enemy {
 
     }
 
+    /**
+     * Append this Enemy's info to a node
+     * @param {HTMLElement} node 
+     */
     showEnemy(node) {
         /* main node */
         let enemyElement = document.createElement('div')
@@ -46,6 +50,10 @@ export class FinalBoss extends Enemy {
         this.src = src
     }
 
+    /**
+     * Append this FinalBoss' info to a node
+     * @param {HTMLElement} node 
+     */
     showEnemy(node) {
         /* main node */
         let enemyElement = document.createElement('div')

@@ -14,7 +14,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "MedievalSharp", cursive;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 header {
@@ -168,15 +168,13 @@ main {
     background-color: #b86e14;
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     border: 4px solid var(--primary-color);
-    border-radius: 10px;
+    border-radius: 20px;
     width: 80vw;
     height: 100%;
     padding: 10px;
-
 }
 
 #shop {
-
     padding: auto;
     display: flex;
     flex-direction: row;
@@ -192,9 +190,9 @@ main {
 }
 
 #shop img {
-    width: 100px;
-    height: 100px;
-
+    width: 75px;
+    height: 75px;
+    animation: bigRotate 0.5s ease;
 }
 
 #shop>div {
@@ -208,6 +206,7 @@ main {
     align-items: center;
     gap: 2px;
     height: 150px;
+    overflow: hidden;
 }
 
 #shop>div:hover {
@@ -239,16 +238,43 @@ main {
     color: var(--secondary-color);
 }
 
+#shop>div.bought img {
+    animation: smallRotate 0.5s ease;
+    transform: scale(0.5);
+}
+
+@keyframes smallRotate {
+    from {
+        transform: scale(1.05) rotate(0deg);
+    }
+
+    to {
+        transform: scale(0.5) rotate(360deg);
+    }
+}
+
+@keyframes bigRotate {
+    from {
+        transform: scale(0.5) rotate(160deg);
+    }
+
+    to {
+        transform: scale(1.05) rotate(0deg);
+    }
+}
+
+
+
 /* Phone */
 @media (max-width: 600px) {
     #scene-shop h3 {
         font-size: 10px;
     }
 
-    #shop img {
+    /* #shop img {
         width: 75px;
         height: 75px;
-    }
+    } */
 
 }
 
@@ -304,7 +330,7 @@ main {
     background-color: #b86e14;
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     border: 4px solid var(--primary-color);
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px;
     height: auto;
     width: 200px;
@@ -362,7 +388,7 @@ main {
 #scene-battle-container {
     height: 100%;
     border: 4px solid var(--primary-color);
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #b86e14;
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     display: flex;
@@ -420,6 +446,56 @@ main {
     bottom: 20px;
 }
 
+#scene-battle-container #player-battle img {
+    animation: fromLeft 0.5s ease;
+}
+
+#scene-battle-container #enemy-battle img {
+    animation: fromRight 0.5s ease;
+}
+
+
+@keyframes fromLeft {
+    from {
+        transform: translateX(-70vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fromRight {
+    from {
+        transform: translateX(70vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* #scene-battle-container #battle>div:nth-child(2) {
+    animation: bigSmall 0.5s ease;
+    animation-delay: 0.5s;
+}
+
+@keyframes bigSmall {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+} */
+
+
+
 /* Phone */
 @media (max-width: 480px) {
     #scene-battle-container img {
@@ -449,7 +525,7 @@ main {
     align-items: center;
     justify-content: center;
     border: 4px solid var(--primary-color);
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #b86e14;
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     padding: 10px;
@@ -490,52 +566,50 @@ footer {
     align-items: center;
     justify-content: center;
 
-    #inventory-container {
-        background-color: #b86e14;
-        background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-items: center;
-        width: 90%;
-        max-width: 800px;
-        margin: 8px 20%;
-        padding: 8px;
-        gap: 4px;
-        border: 4px solid var(--primary-color);
-        border-radius: 10px;
+}
 
-        @media (max-width: 768px) {
-            margin: 8px 5%;
-        }
+footer #inventory-container {
+    background-color: #b86e14;
+    background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    width: 90%;
+    max-width: 800px;
+    margin: 8px 20%;
+    padding: 8px;
+    gap: 4px;
+    border: 4px solid var(--primary-color);
+    border-radius: 10px;
+}
 
-        .item {
-            flex: 1;
-            aspect-ratio: 1 / 1;
-            border: 4px solid var(--primary-color);
-            border-radius: 10px;
-            background-color: var(--secondary-color);
-
-            img {
-                border: none;
-                width: 100%;
-                height: 100%;
-            }
-        }
+@media (max-width: 768px) {
+    footer #inventory-container {
+        margin: 8px 5%;
     }
 }
 
-
-
-.button-container {
-    height: 20%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+footer #inventory-container .item {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    border: 4px solid var(--primary-color);
+    border-radius: 10px;
+    background-color: var(--secondary-color);
 }
 
+footer #inventory-container .item img {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+footer #inventory-container .item img:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+}
+
+/* SCENE BUTTONS */
 #player-continue,
 #shop-continue,
 #player-inventory-continue,
@@ -560,6 +634,15 @@ footer {
 #ranking-reset:hover {
     transform: scale(1.05);
     transition: transform 0.1s ease;
+}
+
+.button-container {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 /* Phone */

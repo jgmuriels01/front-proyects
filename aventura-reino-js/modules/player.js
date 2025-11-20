@@ -1,3 +1,5 @@
+import { Product } from "./product.js"
+
 export class Player {
 
     constructor(name) {
@@ -15,6 +17,11 @@ export class Player {
         this.points += points;
     }
 
+    /**
+     * Add hp to this Player
+     * might increase maxHp
+     * @param {int} hp value to increase this.hp
+     */
     addHp(hp) {
         this.hp += hp;
         if (this.hp > this.maxHp) {
@@ -30,6 +37,12 @@ export class Player {
         this.defense += defense;
     }
 
+    /**
+     * Add a product to this.inventory
+     * while inventory has less than 6 products
+     * @param {Product} product product to be bought
+     * @returns true if space in inventory
+     */
     buyProduct(product) {
         if (this.inventory.length < 6) {
             this.inventory.push(product)
@@ -38,10 +51,18 @@ export class Player {
         return false
     }
 
+    /**
+     * Remove a product from the player's inventory
+     * @param {Product} productToRemove product to be removed
+     */
     removeProduct(productToRemove) {
         this.inventory = this.inventory.filter(product => product !== productToRemove)
     }
 
+    /**
+     * Go throught player inventory and based on item's type
+     * add attack, defese or hp
+     */
     updateStats() {
         this.inventory.forEach(product => {
             switch (product.type) {
@@ -59,6 +80,13 @@ export class Player {
         });
     }
 
+    /**
+     * Show player inventory in the given list of nodes,
+     * meant to be the nodes of the footer inventory.
+     * Create img, set its atributes, empty footer inventory node and fill it
+     * with the new img.
+     * @param {HTMLElement[]} nodes given list of nodes
+     */
     showInventory(nodes) {
         for (let i = 0; i < nodes.length && i < this.inventory.length; i++) {
             let imgElement = document.createElement('img')
@@ -68,6 +96,10 @@ export class Player {
         }
     }
 
+    /**
+     * Show player stats in a given node
+     * @param {HTMLElement} node node where to append stats
+     */
     showStats(node) {
         /* restet */
         node.innerHTML = ""
@@ -88,6 +120,10 @@ export class Player {
         node.append(defenseElement)
     }
 
+    /**
+     * Show player info in a given node
+     * @param {HTMLElement} node node where to append player stats
+     */
     showPlayer(node) {
         /* get nodes */
         let playerImgElement = node.querySelector('.player-img')

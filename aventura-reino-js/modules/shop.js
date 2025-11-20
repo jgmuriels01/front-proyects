@@ -1,16 +1,41 @@
+import { Product } from "./product.js";
+
+/**
+ * Filter a shop by a given rarity
+ * @param {String} rarity rarity to filter
+ * @param {Product[]} shop list to be filtered
+ * @returns shop with products which match the ratity
+ */
 function filterShop(rarity, shop) {
     return shop.filter(product => product.rarity === rarity);
 }
 
+/**
+ * Find a product in a list by its id
+ * @param {Product[]} shop collection of Product
+ * @param {int} id id of Product
+ * @returns product
+ */
 export function findProduct(shop, id) {
     return shop.find(product => product.id === id);
 }
 
+/**
+ * Apply a discount to all products of a collection
+ * @param {Product[]} shop collection of Product
+ * @param {String} rarity rarity to filter Product
+ * @param {int} discount discount to apply to Product price
+ */
 export function applyDiscount(shop, rarity, discount) {
     filterShop(rarity, shop).forEach(product => product.discount(discount))
 }
 
-export function showShop(node, shop){
+/**
+ * Show a show with all its products in a node
+ * @param {HTMLElement} node node where to append shop
+ * @param {Product[]} shop collection of Product
+ */
+export function showShop(node, shop) {
     shop.forEach(product => {
         /* main node */
         let productElement = document.createElement('div')
@@ -32,13 +57,21 @@ export function showShop(node, shop){
     });
 }
 
-export function randomRarity(){
+/**
+ * Choose a random rarity
+ * @returns random rarity
+ */
+export function randomRarity() {
     let rarities = ['Common', 'Rare', 'Legendary']
-    let random = Math.floor(Math.random()*rarities.length)
+    let random = Math.floor(Math.random() * rarities.length)
     return rarities[random]
 }
 
-export function randomDiscount(){
-    let random = Math.floor(Math.random() * 95) + 5
+/**
+ * Provide a random int between 5 and 95
+ * @returns random int
+ */
+export function randomDiscount() {
+    let random = Math.floor(Math.random() * (95 - 5 + 1)) + 5
     return random
 }

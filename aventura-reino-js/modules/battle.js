@@ -1,5 +1,11 @@
 import { Enemy } from "./enemies.js";
 
+/**
+ * Perform battle between a player and a enemy.
+ * @param {Player} player the one which earns the points
+ * @param {Enemy} enemy the other battle entity
+ * @returns points won by player
+ */
 function battle(player, enemy) {
     let enemyPower = Math.max(0, enemy.attack - player.defense);
     let enemyOriginalHp = enemy.hp;
@@ -8,12 +14,12 @@ function battle(player, enemy) {
         player.hp -= enemyPower;
     }
     if (player.hp > 0 && enemy.hp <= 0) {
-        if (typeof enemy == Enemy) {
+        if (enemy instanceof Enemy) {
             player.addPoint(100 + enemy.attack)
-            return (100 + enemy.attack)
+            return 100 + enemy.attack
         } else {
             player.addPoint((100 + enemy.attack) * enemy.multiplierDamage)
-            return ((100 + enemy.attack) * enemy.multiplierDamage)
+            return (100 + enemy.attack) * enemy.multiplierDamage
         }
 
     }
@@ -22,6 +28,12 @@ function battle(player, enemy) {
     return 0
 }
 
+/**
+ * Select randomly among all enemies and final bosses
+ * @param {Enemy[]} enemies collection of Enemy to pick from
+ * @param {FinalBoss[]} bosses collection of FinalBoss to pick from
+ * @returns Enemy or FinalBoss randomly selected
+ */
 function randomEnemy(enemies, bosses) {
     let random = Math.floor(Math.random() * (enemies.length + bosses.length))
 
@@ -33,6 +45,14 @@ function randomEnemy(enemies, bosses) {
     }
 }
 
+/**
+ * Create battle elements and append it to a given node
+ * @param {HTMLElement} node node where to append battle
+ * @param {Player} player player
+ * @param {Enemy[]} enemies collection of Enemy to pick from
+ * @param {FinalBoss[]} bosses collection of FinalBoss to pick from
+ * @param {int} battleCounter counter of number of battles performed
+ */
 export function showBattle(node, player, enemies, bosses, battleCounter) {
     let enemy = randomEnemy(enemies, bosses)
     let pointsWon = battle(player, enemy)

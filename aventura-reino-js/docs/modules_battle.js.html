@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/battle.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/battle.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Enemy } from "./enemies.js";
+
+/**
+ * Perform battle between a player and a enemy.
+ * @param {Player} player the one which earns the points
+ * @param {Enemy} enemy the other battle entity
+ * @returns points won by player
+ */
+function battle(player, enemy) {
+    let enemyPower = Math.max(0, enemy.attack - player.defense);
+    let enemyOriginalHp = enemy.hp;
+    while (player.hp > 0 &amp;&amp; enemy.hp > 0) {
+        enemy.hp -= player.attack;
+        player.hp -= enemyPower;
+    }
+    if (player.hp > 0 &amp;&amp; enemy.hp &lt;= 0) {
+        if (enemy instanceof Enemy) {
+            player.addPoint(100 + enemy.attack)
+            return 100 + enemy.attack
+        } else {
+            player.addPoint((100 + enemy.attack) * enemy.multiplierDamage)
+            return (100 + enemy.attack) * enemy.multiplierDamage
+        }
+
+    }
+    // Reset both to previous hp
+    enemy.hp = enemyOriginalHp;
+    return 0
+}
+
+/**
+ * Select randomly among all enemies and final bosses
+ * @param {Enemy[]} enemies collection of Enemy to pick from
+ * @param {FinalBoss[]} bosses collection of FinalBoss to pick from
+ * @returns Enemy or FinalBoss randomly selected
+ */
+function randomEnemy(enemies, bosses) {
+    let random = Math.floor(Math.random() * (enemies.length + bosses.length))
+
+    if (random > enemies.length - 1) {
+        random -= enemies.length
+        return bosses[random]
+    } else {
+        return enemies[random]
+    }
+}
+
+/**
+ * Create battle elements and append it to a given node
+ * @param {HTMLElement} node node where to append battle
+ * @param {Player} player player
+ * @param {Enemy[]} enemies collection of Enemy to pick from
+ * @param {FinalBoss[]} bosses collection of FinalBoss to pick from
+ * @param {int} battleCounter counter of number of battles performed
+ */
+export function showBattle(node, player, enemies, bosses, battleCounter) {
+    let enemy = randomEnemy(enemies, bosses)
+    let pointsWon = battle(player, enemy)
+    /* battle count */
+    let battleCountElement = document.getElementById('battle-count')
+    battleCountElement.innerText = `Batalla ${battleCounter}`
+    /* battle nodes */
+    let playerBattleElement = node.querySelector('#player-battle')
+    let enemyBattleElement = node.querySelector('#enemy-battle')
+    playerBattleElement.innerHTML = ""
+    enemyBattleElement.innerHTML = ""
+    /* battle sub-nodes */
+    let playerNameElement = document.createElement('h2')
+    let playerImgElement = document.createElement('img')
+    let enemyNameElement = document.createElement('h2')
+    let enemyImgElement = document.createElement('img')
+    playerNameElement.innerText = player.name
+    playerImgElement.setAttribute('src', player.src)
+    enemyNameElement.innerText = enemy.name
+    enemyImgElement.setAttribute('src', enemy.src)
+    playerBattleElement.append(playerNameElement)
+    playerBattleElement.append(playerImgElement)
+    enemyBattleElement.append(enemyNameElement)
+    enemyBattleElement.append(enemyImgElement)
+    /* battle-info */
+    let winnerElement = node.querySelector('#winner')
+    let points = node.querySelector('#points')
+    points.innerText = pointsWon
+    if (pointsWon > 0) {
+        winnerElement.innerText = player.name
+    } else {
+        winnerElement.innerText = enemy.name
+    }
+
+
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#applyDiscount">applyDiscount</a></li><li><a href="global.html#battle">battle</a></li><li><a href="global.html#categorizePlayer">categorizePlayer</a></li><li><a href="global.html#filterShop">filterShop</a></li><li><a href="global.html#findProduct">findProduct</a></li><li><a href="global.html#randomDiscount">randomDiscount</a></li><li><a href="global.html#randomEnemy">randomEnemy</a></li><li><a href="global.html#randomRarity">randomRarity</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#showBattle">showBattle</a></li><li><a href="global.html#showRanking">showRanking</a></li><li><a href="global.html#showScene">showScene</a></li><li><a href="global.html#showShop">showShop</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Nov 20 2025 15:16:09 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

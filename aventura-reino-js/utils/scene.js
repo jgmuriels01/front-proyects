@@ -1,3 +1,8 @@
+/**
+ * Show a scene chosen by its id,
+ * hide others
+ * @param {int} id id of scene
+ */
 export function showScene(id) {
     document.querySelectorAll('.scene').forEach(
         element => element.classList.remove('active')
