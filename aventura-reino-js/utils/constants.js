@@ -13,8 +13,8 @@ export const ENEMIES = [
 ];
 
 export const FINAL_BOSSES = [
-    new FinalBoss('Dragón', 150, 50, 'Aliento de fuego', 1.3, './IMG/dragon.png'),
-    new FinalBoss('Kraken', 200, 40, 'Tsunami', 1.3, './IMG/kraken.png')
+    new FinalBoss('Dragón', 150, 50, 'Aliento de fuego', './IMG/dragon.png'),
+    new FinalBoss('Kraken', 200, 40, 'Tsunami', './IMG/kraken.png')
 ];
 
 export let SHOP = [

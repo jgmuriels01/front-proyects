@@ -41,19 +41,26 @@
         </div>
         <div id="scene-player-inventory" class="scene">
             <div id="scene-player-inventory-container">
-                <div>
+                <div id="player-name-inventory-container">
                     <img class="player-img" alt="player-img">
                     <div class="player-name"></div>
                 </div>
                 <div class="player-stats"></div>
-                <button id="player-inventory-continue">Continuar</button>
+                <div class="button-container">
+                    <button id="player-inventory-continue">Continuar</button>
+                </div>
+
             </div>
         </div>
         <div id="scene-enemies" class="scene">
             <div id="scene-enemies-container">
-                <div id="enemies"></div>
-                <div id="final-bosses"></div>
-                <button id="enemies-continue">Continuar</button>
+                <div id="all-enemies">
+                    <div id="enemies"></div>
+                    <div id="final-bosses"></div>
+                </div>
+                <div class="button-container">
+                    <button id="enemies-continue">Continuar</button>
+                </div>
             </div>
         </div>
         <div id="scene-battle" class="scene">
@@ -68,14 +75,19 @@
                     <div>Ganador: <span id="winner"></span></div>
                     <div>¡Ha ganado <span id="points"></span> puntos!</div>
                 </div>
-                <button id="battle-continue">Continuar</button>
+                <div class="button-container">
+                    <button id="battle-continue">Continuar</button>
+                </div>
+
             </div>
         </div>
         <div id="scene-ranking" class="scene">
             <div id="scene-ranking-container">
                 <div><span id="player-name-ranking"></span> es un <span id="player-category"></span></div>
                 <div><span id="points-ranking"></span> puntos</div>
-                <button id="ranking-reset">Reiniciar</button>
+                <div class="button-container">
+                    <button id="ranking-reset">Reiniciar</button>
+                </div>
             </div>
         </div>
     </main>

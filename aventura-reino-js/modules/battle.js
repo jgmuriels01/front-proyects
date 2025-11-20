@@ -1,18 +1,25 @@
+import { Enemy } from "./enemies.js";
+
 function battle(player, enemy) {
-    let enemyPower = Math.max(5, enemy.attack - player.defense);
+    let enemyPower = Math.max(0, enemy.attack - player.defense);
     let enemyOriginalHp = enemy.hp;
     while (player.hp > 0 && enemy.hp > 0) {
         enemy.hp -= player.attack;
         player.hp -= enemyPower;
     }
     if (player.hp > 0 && enemy.hp <= 0) {
-        player.addPoint(enemyPower)
-        return enemyPower
+        if (typeof enemy == Enemy) {
+            player.addPoint(100 + enemy.attack)
+            return (100 + enemy.attack)
+        } else {
+            player.addPoint((100 + enemy.attack) * enemy.multiplierDamage)
+            return ((100 + enemy.attack) * enemy.multiplierDamage)
+        }
+
     }
-    return 0
     // Reset both to previous hp
     enemy.hp = enemyOriginalHp;
-
+    return 0
 }
 
 function randomEnemy(enemies, bosses) {

@@ -38,11 +38,11 @@ export class Enemy {
 
 export class FinalBoss extends Enemy {
 
-    constructor(name, hp, attack, specialSkill, multiplierDamage, src) {
+    constructor(name, hp, attack, specialSkill, src) {
         super(name, hp, attack)
-        this.attack = attack * multiplierDamage
+        this.attack = attack
         this.specialSkill = specialSkill
-        this.multiplierDamage = multiplierDamage
+        this.multiplierDamage = 1.2
         this.src = src
     }
 

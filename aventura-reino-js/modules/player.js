@@ -17,8 +17,8 @@ export class Player {
 
     addHp(hp) {
         this.hp += hp;
-        if (hp > this.maxHp) {
-            this.maxHp = hp
+        if (this.hp > this.maxHp) {
+            this.maxHp = this.hp
         }
     }
 
