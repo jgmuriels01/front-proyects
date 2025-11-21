@@ -1,6 +1,7 @@
 :root {
     --primary-color: rgb(71, 36, 9);
     --primary-light-color: rgb(126, 65, 17);
+    --background-color: rgb(199, 110, 42);
     --secondary-color: rgb(202, 183, 8);
     --accent-color: rgb(51, 218, 45);
     --danger-color: rgb(249, 65, 19);
@@ -47,9 +48,6 @@ h1 {
     }
 }
 
-/* PC */
-@media (min-width: 1025px) {}
-
 h2 {
     font-size: 40px;
     font-weight: bold;
@@ -62,7 +60,7 @@ body {
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("/IMG/background-town.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -83,6 +81,7 @@ main {
     align-items: center;
     justify-content: center;
     height: 60vh;
+    max-height: 600px;
     width: 90vw;
 }
 
@@ -93,7 +92,7 @@ main {
 /* PLAYER */
 #scene-player-container,
 #scene-player-inventory-container {
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     border: 4px solid var(--primary-color);
     border-radius: 20px;
@@ -153,11 +152,30 @@ main {
     }
 }
 
-/* Tablet */
-@media (min-width: 481px) and (max-width: 1024px) {}
-
 /* PC */
-@media (min-width: 1025px) {}
+@media (max-height: 700px) {
+
+    #scene-player-container .player-name,
+    #scene-player-inventory-container .player-name {
+        font-size: 1.5rem;
+    }
+
+    #scene-player-container .player-stats,
+    #scene-player-inventory-container .player-stats {
+        font-size: 1.5rem;
+    }
+
+    #scene-player-container img,
+    #scene-player-inventory-container img {
+        height: 100px;
+        width: 75px;
+    }
+
+    #scene-player-container #player-name-container,
+    #scene-player-inventory-container #player-name-inventory-container {
+        gap: 2px;
+    }
+}
 
 /* SHOP */
 #scene-shop-container {
@@ -165,23 +183,23 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     border: 4px solid var(--primary-color);
     border-radius: 20px;
-    width: 80vw;
+    width: auto;
     height: 100%;
     padding: 10px;
 }
 
 #shop {
     padding: auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     flex-direction: row;
     justify-self: center;
     flex-wrap: wrap;
     gap: 2px;
-    height: 70%;
     overflow-y: auto;
     scrollbar-color: var(--secondary-color) var(--primary-color);
     margin-inline: auto;
@@ -271,11 +289,7 @@ main {
         font-size: 10px;
     }
 
-    /* #shop img {
-        width: 75px;
-        height: 75px;
-    } */
-
+    
 }
 
 /* Tablet */
@@ -292,10 +306,26 @@ main {
         width: 75px;
         height: 75px;
     }
+
+
 }
 
 /* PC */
-@media (min-width: 1025px) {}
+@media (max-width: 700px) {
+    #shop {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    #shop {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 500px) {
+    #shop {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
 /* ENEMIES */
 #scene-enemies-container {
@@ -327,7 +357,7 @@ main {
 
 #scene-enemies-container #enemies>div,
 #scene-enemies-container #final-bosses>div {
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     border: 4px solid var(--primary-color);
     border-radius: 20px;
@@ -389,7 +419,7 @@ main {
     height: 100%;
     border: 4px solid var(--primary-color);
     border-radius: 20px;
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     display: flex;
     flex-direction: column;
@@ -447,11 +477,11 @@ main {
 }
 
 #scene-battle-container #player-battle img {
-    animation: fromLeft 0.5s ease;
+    animation: fromRight 0.5s ease;
 }
 
 #scene-battle-container #enemy-battle img {
-    animation: fromRight 0.5s ease;
+    animation: fromLeft 0.5s ease;
 }
 
 
@@ -475,27 +505,6 @@ main {
     }
 }
 
-/* #scene-battle-container #battle>div:nth-child(2) {
-    animation: bigSmall 0.5s ease;
-    animation-delay: 0.5s;
-}
-
-@keyframes bigSmall {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.5);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-} */
-
-
-
 /* Phone */
 @media (max-width: 480px) {
     #scene-battle-container img {
@@ -516,6 +525,33 @@ main {
     }
 }
 
+@media (max-height: 800px) {
+    #scene-battle-container img {
+        height: 100px;
+        width: 100px;
+    }
+
+    #scene-battle-container #battle>div:nth-child(2) {
+        font-size: 1rem;
+    }
+
+    #scene-battle-container #battle h2 {
+        font-size: 0.9rem;
+    }
+
+    #scene-battle-container #battle-info {
+        font-size: 1rem;
+    }
+
+    #scene-battle-container #battle-count {
+        margin: 5px;
+    }
+
+    #scene-battle-container #battle {
+        margin: 5px;
+    }
+}
+
 /* RANKING */
 #scene-ranking-container {
     height: 100%;
@@ -526,7 +562,7 @@ main {
     justify-content: center;
     border: 4px solid var(--primary-color);
     border-radius: 20px;
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     padding: 10px;
     font-size: 1.5rem;
@@ -569,7 +605,7 @@ footer {
 }
 
 footer #inventory-container {
-    background-color: #b86e14;
+    background-color: var(--background-color);
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
     display: flex;
     flex-direction: row;
@@ -596,12 +632,15 @@ footer #inventory-container .item {
     border: 4px solid var(--primary-color);
     border-radius: 10px;
     background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 footer #inventory-container .item img {
     border: none;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
 }
 
 footer #inventory-container .item img:hover {
@@ -646,21 +685,15 @@ footer #inventory-container .item img:hover {
 }
 
 /* Phone */
-@media (max-width: 480px) {}
+@media (max-height: 700px) {
 
-/* Tablet */
-@media (min-width: 481px) and (max-width: 1024px) {}
-
-/* PC */
-@media (min-width: 1025px) {}
-
-
-
-/* Phone */
-@media (max-width: 480px) {}
-
-/* Tablet */
-@media (min-width: 481px) and (max-width: 1024px) {}
-
-/* PC */
-@media (min-width: 1025px) {}
+    #player-continue,
+    #shop-continue,
+    #player-inventory-continue,
+    #enemies-continue,
+    #battle-continue,
+    #ranking-reset {
+        height: 50px;
+        width: 150px;
+    }
+}

@@ -117,6 +117,11 @@ battleContinueButtonElement.addEventListener("click", () => {
     } else {
         showScene("scene-ranking")
         showRanking(document.getElementById('scene-ranking-container'), PLAYER, PROPLAYER_POINTS)
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
     }
 })
 /* reset button RANKING */
@@ -126,6 +131,7 @@ rankingResetButtonElement.addEventListener("click", () => {
     PLAYER.showPlayer(document.getElementById(initialScene))
     PLAYER.showInventory(footerInventoryItemElements)
 })
+
 
 
 
