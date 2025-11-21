@@ -61,10 +61,11 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     background-color: var(--background-color);
-    background-image: url("/IMG/background-town.jpg");
+    background-image: url("/aventura-reino-js/IMG/background-town.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    overflow: hidden;
 
 }
 
