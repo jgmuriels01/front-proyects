@@ -19,6 +19,9 @@ function dayCoincidence(nowDay, day) {
 }
 
 function hourBetween(nowMinutes, startMinutes, endMinutes) {
+    if(Number(startMinutes) > Number(endMinutes)){
+        return nowMinutes >= Number(startMinutes)
+    }
     return nowMinutes >= Number(startMinutes) && (nowMinutes <= Number(endMinutes) || Number(endMinutes) == 0)
 }
 
