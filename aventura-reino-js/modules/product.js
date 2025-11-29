@@ -1,3 +1,6 @@
+/**
+* Product class
+*/
 export class Product {
 
     static globalId = 0;
