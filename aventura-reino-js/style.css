@@ -3,8 +3,7 @@
     --primary-light-color: rgb(126, 65, 17);
     --background-color: rgb(199, 110, 42);
     --secondary-color: rgb(202, 183, 8);
-    --accent-color: rgb(51, 218, 45);
-    --danger-color: rgb(249, 65, 19);
+    --text-color: rgb(0, 0, 0);
 
 }
 
@@ -15,7 +14,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "MedievalSharp", cursive;
-    /* overflow: hidden; */
+    color: var(--text-color);
 }
 
 header {
@@ -66,7 +65,6 @@ body {
     background-size: cover;
     position: relative;
     overflow: hidden;
-
 }
 
 main {
@@ -226,13 +224,13 @@ main {
     gap: 2px;
     height: 150px;
     overflow: hidden;
+    font-size: 0.6rem;
 }
 
 #shop>div:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.1s ease;
-
 }
 
 #shop>div.bought {
@@ -412,6 +410,9 @@ main {
 
 #scene-enemies-container #final-bosses>div>div:nth-child(2) {
     background-color: var(--primary-color);
+}
+
+#scene-enemies-container #final-bosses>div>div:nth-child(2) div{
     color: var(--secondary-color);
 }
 
@@ -456,6 +457,7 @@ main {
 
 #scene-battle-container #battle h2 {
     font-size: 1.5rem;
+    color: var(--text-color);
 }
 
 #scene-battle-container img {
@@ -465,6 +467,10 @@ main {
     border-radius: 10px;
     background-color: var(--secondary-color);
     padding: 10px;
+}
+
+#scene-battle-container img.final-boss{
+    background-color: var(--primary-light-color);
 }
 
 #scene-battle-container #battle-info {

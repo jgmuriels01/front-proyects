@@ -42,14 +42,27 @@ export function showShop(node, shop) {
         productElement.id = product.id
         /* sub-main node layer */
         let imgElement = document.createElement('img')
+        let statsElement = document.createElement('div')
         let priceElement = document.createElement('div')
         let comprarElement = document.createElement('button')
         /* sub-main node layer FILL */
         product.showProduct(imgElement)
-        priceElement.innerText = `${product.price}$`
+        switch (product.type) {
+                case "Weapon":
+                    statsElement.innerText = `Ataque: ${(product.stat)}`
+                    break;
+                case "Armor":
+                    statsElement.innerText = `Defensa: ${(product.stat)}`
+                    break;
+                case "Potion":
+                    statsElement.innerText = `Vida: ${(product.stat)}`
+                    break;
+            }
+        priceElement.innerText = `${(product.price).toFixed(2)}$`
         comprarElement.innerText = 'Comprar'
         /* sub-main node layer APPEND */
         productElement.append(imgElement)
+        productElement.append(statsElement)
         productElement.append(priceElement)
         productElement.append(comprarElement)
         /* main node append */

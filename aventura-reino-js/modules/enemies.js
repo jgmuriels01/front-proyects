@@ -28,8 +28,8 @@ export class Enemy {
         /* stats node layer */
         let hpElement = document.createElement('div')
         let attackElement = document.createElement('div')
-        hpElement.innerText = `HP = ${this.hp}`
-        attackElement.innerText = `Attack = ${this.attack}`
+        hpElement.innerText = `Vida = ${this.hp}`
+        attackElement.innerText = `Ataque = ${this.attack}`
         statsElement.appendChild(hpElement)
         statsElement.appendChild(attackElement)
         /* first node layer appends */
@@ -71,9 +71,9 @@ export class FinalBoss extends Enemy {
         let hpElement = document.createElement('div')
         let attackElement = document.createElement('div')
         let specialSkillElement = document.createElement('div')
-        hpElement.innerText = `HP = ${this.hp}`
-        attackElement.innerText = `Attack = ${this.attack}`
-        specialSkillElement.innerText = `Special skill = ${this.specialSkill}`
+        hpElement.innerText = `Vida = ${this.hp}`
+        attackElement.innerText = `Ataque = ${this.attack}`
+        specialSkillElement.innerText = `Ultimate = ${this.specialSkill}`
         statsElement.appendChild(hpElement)
         statsElement.appendChild(attackElement)
         statsElement.appendChild(specialSkillElement)

@@ -76,7 +76,6 @@ export class Player {
                     this.addHp(product.stat);
                     break;
             }
-            console.log(`cambiando stats ${product.type}`)
         });
     }
 
@@ -109,10 +108,10 @@ export class Player {
         let attackElement = document.createElement('div')
         let defenseElement = document.createElement('div')
         /* fill nodes */
-        pointsElement.innerText = `Points = ${this.points}`
-        hpElement.innerText = `HP = ${this.hp}/${this.maxHp}`
-        attackElement.innerText = `Attack = ${this.attack}`
-        defenseElement.innerText = `Defense = ${this.defense}`
+        pointsElement.innerText = `Puntos = ${this.points}`
+        hpElement.innerText = `Vida = ${this.hp}/${this.maxHp}`
+        attackElement.innerText = `Ataque = ${this.attack}`
+        defenseElement.innerText = `Defensa = ${this.defense}`
         /* append nodes */
         node.append(pointsElement)
         node.append(hpElement)

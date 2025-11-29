@@ -1,4 +1,4 @@
-import { Enemy } from "./enemies.js";
+import { Enemy, FinalBoss } from "./enemies.js";
 
 /**
  * Perform battle between a player and a enemy.
@@ -73,6 +73,9 @@ export function showBattle(node, player, enemies, bosses, battleCounter) {
     playerImgElement.setAttribute('src', player.src)
     enemyNameElement.innerText = enemy.name
     enemyImgElement.setAttribute('src', enemy.src)
+    if(enemy instanceof FinalBoss){
+        enemyImgElement.classList.add('final-boss')
+    }
     playerBattleElement.append(playerNameElement)
     playerBattleElement.append(playerImgElement)
     enemyBattleElement.append(enemyNameElement)
