@@ -18,6 +18,23 @@
         <h1 id="title">Aventura en el Reino de JS</h1>
     </header>
     <main>
+        <div id="scene-form" class="scene">
+            <label>Nombre</label>
+            <input id="nombre-form">
+            <label>Ataque</label>
+            <label id="ataque-form"></label>
+            <button id="boton-ataque">Subir ataque</button>
+            <button id="boton-ataque-menos">Bajar ataque</button>
+            <label>Defesa</label>
+            <label id="defensa-form"></label>
+            <button id="boton-defensa">Subir defensa</button>
+            <button id="boton-defensa-menos">Bajar defensa</button>
+            <label>Vida</label>
+            <label id="vida-form"></label>
+            <button id="boton-vida">Subir vida</button>
+            <button id="boton-vida-menos">Bajar vida</button>
+            <button id="form-continue">Continuar</button>
+        </div>
         <div id="scene-player" class="scene">
             <div id="scene-player-container">
                 <div id="player-name-container">
@@ -34,6 +51,7 @@
             <div id="scene-shop-container">
                 <h2>Mercado</h2>
                 <h3>¡Hoy <span id="discount"></span>% de descuento en objetos <span id="rarity"></span>!</h3>
+                <h3 id="dinero-shop"></h3>
                 <div id="shop"></div>
                 <div class="button-container">
                     <button id="shop-continue">Continuar</button>
@@ -86,6 +104,7 @@
             <div id="scene-ranking-container">
                 <div><span id="player-name-ranking"></span> es un <span id="player-category"></span></div>
                 <div><span id="points-ranking"></span> puntos</div>
+                <button id="ver-ranking">Ver ranking</button>
                 <div class="button-container">
                     <button id="ranking-reset">Reiniciar</button>
                 </div>

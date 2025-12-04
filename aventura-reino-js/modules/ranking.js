@@ -16,7 +16,7 @@ function categorizePlayers(players, proPoints) {
  * @returns return category
  */
 function categorizePlayer(player, proPoints) {
-    return player.points >= proPoints ? 'ProPlayer' : 'Rookie';
+    return (player.points + player.dinero) >= proPoints ? 'ProPlayer' : 'Rookie';
 }
 
 function rankPlayers(players) {
@@ -35,5 +35,5 @@ export function showRanking(node, player, proPoints){
     let playerPoints = node.querySelector('#points-ranking')
     playerName.innerText = player.name
     playerCategory.innerText = categorizePlayer(player, proPoints)
-    playerPoints.innerText = player.points
+    playerPoints.innerText = (player.points + player.dinero).toFixed(2)
 }

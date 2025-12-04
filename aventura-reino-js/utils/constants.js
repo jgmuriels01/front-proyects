@@ -4,7 +4,7 @@ import { Product } from '../modules/product.js';
 
 export const PROPLAYER_POINTS = 250;
 
-export const PLAYER = new Player('Hollow Knight');
+export let PLAYER = new Player('Hollow Knight');
 
 export const ENEMIES = [
     new Enemy('Goblin', 50, 10, './IMG/goblin.png'),

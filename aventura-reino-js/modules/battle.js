@@ -14,12 +14,14 @@ function battle(player, enemy) {
         player.hp -= enemyPower;
     }
     if (player.hp > 0 && enemy.hp <= 0) {
-        if (enemy instanceof Enemy) {
-            player.addPoint(100 + enemy.attack)
-            return 100 + enemy.attack
-        } else {
+        if (enemy instanceof FinalBoss) {
             player.addPoint((100 + enemy.attack) * enemy.multiplierDamage)
+            player.dinero += 10
             return (100 + enemy.attack) * enemy.multiplierDamage
+        } else {
+            player.addPoint(100 + enemy.attack)
+            player.dinero += 5
+            return 100 + enemy.attack
         }
 
     }
@@ -73,7 +75,7 @@ export function showBattle(node, player, enemies, bosses, battleCounter) {
     playerImgElement.setAttribute('src', player.src)
     enemyNameElement.innerText = enemy.name
     enemyImgElement.setAttribute('src', enemy.src)
-    if(enemy instanceof FinalBoss){
+    if (enemy instanceof FinalBoss) {
         enemyImgElement.classList.add('final-boss')
     }
     playerBattleElement.append(playerNameElement)

@@ -88,6 +88,15 @@ main {
     display: flex !important;
 }
 
+/* FORM */
+#scene-form {
+    background-color: var(--background-color);
+    background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    border: 4px solid var(--primary-color);
+    border-radius: 20px;
+    height: 100%;
+}
+
 /* PLAYER */
 #scene-player-container,
 #scene-player-inventory-container {
@@ -288,7 +297,7 @@ main {
         font-size: 10px;
     }
 
-    
+
 }
 
 /* Tablet */
@@ -315,11 +324,13 @@ main {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
 @media (max-width: 600px) {
     #shop {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 @media (max-width: 500px) {
     #shop {
         grid-template-columns: repeat(2, 1fr);
@@ -412,7 +423,7 @@ main {
     background-color: var(--primary-color);
 }
 
-#scene-enemies-container #final-bosses>div>div:nth-child(2) div{
+#scene-enemies-container #final-bosses>div>div:nth-child(2) div {
     color: var(--secondary-color);
 }
 
@@ -469,7 +480,7 @@ main {
     padding: 10px;
 }
 
-#scene-battle-container img.final-boss{
+#scene-battle-container img.final-boss {
     background-color: var(--primary-light-color);
 }
 
