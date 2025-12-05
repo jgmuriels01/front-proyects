@@ -55,7 +55,7 @@ function randomEnemy(enemies, bosses) {
  * @param {FinalBoss[]} bosses collection of FinalBoss to pick from
  * @param {int} battleCounter counter of number of battles performed
  */
-export function showBattle(node, player, enemies, bosses, battleCounter) {
+export function showBattle(node, player, enemies, bosses, battleCounter, monedasElement, monedaAll) {
     let enemy = randomEnemy(enemies, bosses)
     let pointsWon = battle(player, enemy)
     /* battle count */
@@ -88,6 +88,7 @@ export function showBattle(node, player, enemies, bosses, battleCounter) {
     points.innerText = pointsWon
     if (pointsWon > 0) {
         winnerElement.innerText = player.name
+        monedasElement.style= "animation = down 2s ease"
     } else {
         winnerElement.innerText = enemy.name
     }

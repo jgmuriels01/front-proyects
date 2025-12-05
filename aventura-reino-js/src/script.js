@@ -200,12 +200,14 @@ enemiesContinueButtonElement.addEventListener("click", () => {
     battleCounter++
     showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter)
 })
+let monedasElement = document.getElementById('monedas')
+let monedaAll = document.querySelectorAll('#monedas img')
 /* continue button BATTLE */
 battleContinueButtonElement.addEventListener("click", () => {
     if (battleCounter < 3) {
         battleCounter++
         showScene("scene-battle")
-        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter)
+        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter, monedasElement, monedaAll)
     } else {
         localStorage.setItem(PLAYER.name, `Nombre: ${PLAYER.name} - ${PLAYER.points} puntos - ${PLAYER.dinero.toFixed(2)}$`)
         showScene("scene-ranking")
@@ -221,6 +223,7 @@ battleContinueButtonElement.addEventListener("click", () => {
 let verRankingButton = document.getElementById('ver-ranking')
 verRankingButton.addEventListener('click', () => {
     console.log(localStorage.getItem(PLAYER.name))
+    showScene("scene-tabla")
 })
 rankingResetButtonElement.addEventListener("click", () => {
     showScene("scene-form")
@@ -228,6 +231,14 @@ rankingResetButtonElement.addEventListener("click", () => {
     PLAYER.showInventory(footerInventoryItemElements)
 })
 
+
+/* reset button RANKING */
+let tablaResetButton = document.getElementById("tabla-reset")
+tablaResetButton.addEventListener('click', () => {
+    showScene("scene-form")
+    reset()
+    PLAYER.showInventory(footerInventoryItemElements)
+})
 
 
 
