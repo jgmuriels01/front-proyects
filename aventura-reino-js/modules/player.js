@@ -14,6 +14,7 @@ export class Player {
         this.attack = 5
         this.defense = 0
         this.src = './IMG/knight.png'
+        this.dinero = 500
     }
 
     addPoint(points) {
@@ -40,6 +41,10 @@ export class Player {
         this.defense += defense;
     }
 
+    addDinero(cantidad) {
+        this.dinero += cantidad;
+    }
+
     /**
      * Add a product to this.inventory
      * while inventory has less than 6 products
@@ -47,8 +52,9 @@ export class Player {
      * @returns true if space in inventory
      */
     buyProduct(product) {
-        if (this.inventory.length < 6) {
+        if (this.inventory.length < 6 && this.dinero > product.price) {
             this.inventory.push(product)
+            this.dinero -= (product.price)
             return true
         }
         return false
@@ -60,6 +66,7 @@ export class Player {
      */
     removeProduct(productToRemove) {
         this.inventory = this.inventory.filter(product => product !== productToRemove)
+        this.dinero += (productToRemove.price)
     }
 
     /**
@@ -136,4 +143,18 @@ export class Player {
         playerNameElement.innerText = this.name
         this.showStats(playerStatsElement)
     }
+
+    inicializar(nombre, ataque, defensa, vida){
+        this.name = nombre
+        this.attack = ataque
+        this.defense = defensa
+        this.hp = vida
+        this.maxHp = vida
+    }
+
+    nombreOk(nombre){
+        let regex = /^[A-Z][A-Za-z\s]{0,19}$/
+        return regex.test(nombre)
+    }
 }
+

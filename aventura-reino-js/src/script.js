@@ -14,9 +14,14 @@ let battleCounter = 0
 let rarity = randomRarity()
 let discount = randomDiscount()
 /* init and set scene */
-let initialScene = "scene-player"
+let initialScene = "scene-form"
 showScene(initialScene)
-PLAYER.showPlayer(document.getElementById(initialScene))
+//PLAYER.showPlayer(document.getElementById(initialScene))
+
+let ataque = 0
+let defensa = 0
+let vida = 100
+let puntos = 10
 
 /* Reset */
 /**
@@ -31,6 +36,7 @@ function reset() {
     PLAYER.inventory = [...copyPLAYER.inventory]
     PLAYER.attack = copyPLAYER.attack
     PLAYER.defense = copyPLAYER.defense
+    PLAYER.dinero = copyPLAYER.dinero
     /* reset SHOP */
     SHOP.length = 0
     copySHOP.forEach(product => SHOP.push(product.clone()))
@@ -40,6 +46,15 @@ function reset() {
     /* New rarity and discount */
     rarity = randomRarity()
     discount = randomDiscount()
+
+    ataque = 0
+    defensa = 0
+    vida = 100
+    puntos = 10
+    nombreFormInput.value = ''
+    ataqueFormLabel.innerHTML = ataque
+    defensaFormLabel.innerHTML = defensa
+    vidaFormLabel.innerHTML = vida
 }
 
 /* footer inventory */
@@ -53,6 +68,79 @@ let enemiesContinueButtonElement = document.getElementById("enemies-continue")
 let battleContinueButtonElement = document.getElementById("battle-continue")
 let rankingResetButtonElement = document.getElementById("ranking-reset")
 
+
+/* continue button FORM */
+let formContinueButtonElement = document.getElementById("form-continue")
+
+let ataqueFormButton = document.getElementById("boton-ataque")
+let defensaFormButton = document.getElementById("boton-defensa")
+let vidaFormButton = document.getElementById("boton-vida")
+let ataqueMenosFormButton = document.getElementById("boton-ataque-menos")
+let defensaMenosFormButton = document.getElementById("boton-defensa-menos")
+let vidaMenosFormButton = document.getElementById("boton-vida-menos")
+
+let nombreFormInput = document.getElementById('nombre-form')
+
+let ataqueFormLabel = document.getElementById("ataque-form")
+let defensaFormLabel = document.getElementById("defensa-form")
+let vidaFormLabel = document.getElementById("vida-form")
+
+ataqueFormLabel.innerHTML = ataque
+defensaFormLabel.innerHTML = defensa
+vidaFormLabel.innerHTML = vida
+
+ataqueFormButton.addEventListener('click', () => {
+    if ((puntos) > 0) {
+        ataque++
+        puntos--
+        ataqueFormLabel.innerHTML = ataque
+    }
+})
+defensaFormButton.addEventListener('click', () => {
+    if ((puntos) > 0) {
+        defensa++
+        puntos--
+        defensaFormLabel.innerHTML = defensa
+    }
+})
+vidaFormButton.addEventListener('click', () => {
+    if ((puntos) > 0) {
+        vida++
+        puntos--
+        vidaFormLabel.innerHTML = vida
+    }
+})
+
+ataqueMenosFormButton.addEventListener('click', () => {
+    if (ataque > 0) {
+        ataque--
+        puntos++
+        ataqueFormLabel.innerHTML = ataque
+    }
+})
+defensaMenosFormButton.addEventListener('click', () => {
+    if (defensa > 0) {
+        defensa--
+        puntos++
+        defensaFormLabel.innerHTML = defensa
+    }
+})
+vidaMenosFormButton.addEventListener('click', () => {
+    if (vida > 100) {
+        vida--
+        puntos++
+        vidaFormLabel.innerHTML = vida
+    }
+})
+
+formContinueButtonElement.addEventListener('click', () => {
+    if (puntos == 0 && PLAYER.nombreOk(nombreFormInput.value)) {
+        PLAYER.inicializar(nombreFormInput.value, ataque, defensa, vida)
+        showScene("scene-player")
+        PLAYER.showPlayer(document.getElementById("scene-player"))
+    }
+})
+
 /* continue button PLAYER */
 playerContinueButtonElement.addEventListener("click", () => {
     showScene("scene-shop")
@@ -62,6 +150,8 @@ playerContinueButtonElement.addEventListener("click", () => {
     document.getElementById('rarity').innerText = rarity
     applyDiscount(SHOP, rarity, discount)
     showShop(shopElement, SHOP)
+    let dineroLabel = document.getElementById('dinero-shop')
+    dineroLabel.innerHTML = `Monedero: ${PLAYER.dinero.toFixed(2)} $`
     /* add evetListener to all buttons */
     let buyButtonsElements = document.querySelectorAll("#shop button")
     buyButtonsElements.forEach(buyButton => {
@@ -70,10 +160,12 @@ playerContinueButtonElement.addEventListener("click", () => {
                 PLAYER.removeProduct(findProduct(SHOP, buyButton.parentElement.id))
                 shopElement.querySelector('#' + buyButton.parentElement.id).classList.toggle('bought')
                 buyButton.innerHTML = 'Comprar'
+                dineroLabel.innerHTML = `Monedero: ${PLAYER.dinero.toFixed(2)} $`
             } else {
                 if (PLAYER.buyProduct(findProduct(SHOP, buyButton.parentElement.id))) {
                     shopElement.querySelector('#' + buyButton.parentElement.id).classList.toggle('bought')
                     buyButton.innerHTML = 'Retirar'
+                    dineroLabel.innerHTML = `Monedero: ${PLAYER.dinero.toFixed(2)} $`
                 }
             }
             footerInventoryItemElements.forEach(item => item.innerHTML = "")
@@ -108,13 +200,16 @@ enemiesContinueButtonElement.addEventListener("click", () => {
     battleCounter++
     showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter)
 })
+let monedasElement = document.getElementById('monedas')
+let monedaAll = document.querySelectorAll('#monedas img')
 /* continue button BATTLE */
 battleContinueButtonElement.addEventListener("click", () => {
     if (battleCounter < 3) {
         battleCounter++
         showScene("scene-battle")
-        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter)
+        showBattle(document.getElementById('scene-battle-container'), PLAYER, ENEMIES, FINAL_BOSSES, battleCounter, monedasElement, monedaAll)
     } else {
+        localStorage.setItem(PLAYER.name, `Nombre: ${PLAYER.name} - ${PLAYER.points} puntos - ${PLAYER.dinero.toFixed(2)}$`)
         showScene("scene-ranking")
         showRanking(document.getElementById('scene-ranking-container'), PLAYER, PROPLAYER_POINTS)
         confetti({
@@ -125,13 +220,25 @@ battleContinueButtonElement.addEventListener("click", () => {
     }
 })
 /* reset button RANKING */
+let verRankingButton = document.getElementById('ver-ranking')
+verRankingButton.addEventListener('click', () => {
+    console.log(localStorage.getItem(PLAYER.name))
+    showScene("scene-tabla")
+})
 rankingResetButtonElement.addEventListener("click", () => {
-    showScene("scene-player")
+    showScene("scene-form")
     reset()
-    PLAYER.showPlayer(document.getElementById(initialScene))
     PLAYER.showInventory(footerInventoryItemElements)
 })
 
+
+/* reset button RANKING */
+let tablaResetButton = document.getElementById("tabla-reset")
+tablaResetButton.addEventListener('click', () => {
+    showScene("scene-form")
+    reset()
+    PLAYER.showInventory(footerInventoryItemElements)
+})
 
 
 

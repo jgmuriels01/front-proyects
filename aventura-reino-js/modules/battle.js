@@ -14,12 +14,14 @@ function battle(player, enemy) {
         player.hp -= enemyPower;
     }
     if (player.hp > 0 && enemy.hp <= 0) {
-        if (enemy instanceof Enemy) {
-            player.addPoint(100 + enemy.attack)
-            return 100 + enemy.attack
-        } else {
+        if (enemy instanceof FinalBoss) {
             player.addPoint((100 + enemy.attack) * enemy.multiplierDamage)
+            player.dinero += 10
             return (100 + enemy.attack) * enemy.multiplierDamage
+        } else {
+            player.addPoint(100 + enemy.attack)
+            player.dinero += 5
+            return 100 + enemy.attack
         }
 
     }
@@ -53,7 +55,7 @@ function randomEnemy(enemies, bosses) {
  * @param {FinalBoss[]} bosses collection of FinalBoss to pick from
  * @param {int} battleCounter counter of number of battles performed
  */
-export function showBattle(node, player, enemies, bosses, battleCounter) {
+export function showBattle(node, player, enemies, bosses, battleCounter, monedasElement, monedaAll) {
     let enemy = randomEnemy(enemies, bosses)
     let pointsWon = battle(player, enemy)
     /* battle count */
@@ -73,7 +75,7 @@ export function showBattle(node, player, enemies, bosses, battleCounter) {
     playerImgElement.setAttribute('src', player.src)
     enemyNameElement.innerText = enemy.name
     enemyImgElement.setAttribute('src', enemy.src)
-    if(enemy instanceof FinalBoss){
+    if (enemy instanceof FinalBoss) {
         enemyImgElement.classList.add('final-boss')
     }
     playerBattleElement.append(playerNameElement)
@@ -86,6 +88,7 @@ export function showBattle(node, player, enemies, bosses, battleCounter) {
     points.innerText = pointsWon
     if (pointsWon > 0) {
         winnerElement.innerText = player.name
+        monedasElement.style= "animation = down 2s ease"
     } else {
         winnerElement.innerText = enemy.name
     }
