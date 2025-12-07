@@ -1,0 +1,378 @@
+:root {
+    --primary: #00A83A;
+    --primary-dark: #007B2A;
+    --primary-light: #5ED98B;
+    --primary-soft: #DDF6E6;
+
+    --white: #FFFFFF;
+    --gray-light: #F4F4F4;
+    --gray: #CFCFCF;
+    --gray-dark: #4A4A4A;
+    --black: #000000;
+
+    --secondary: #2A7F7F;
+    --accent: #CBA135;
+    --success: #26C46B;
+    --warning: #E6A100;
+    --danger: #D63B3B;
+    --info: #3C8ED9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--black);
+}
+
+body {
+    background-color: var(--gray-light);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 10vh;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 7vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 4vw;
+    background-color: var(--primary-soft);
+    z-index: 999;
+}
+
+header .logo-extremadev {
+    width: auto;
+    height: 100%;
+    max-width: 150px;
+}
+
+.logo-extremadev text {
+    font-family: "Segoe UI", Inter, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    fill: var(--gray-dark);
+}
+
+.logo-extremadev .x-part1 {
+    fill: var(--primary);
+}
+
+.logo-extremadev .x-part2 {
+    fill: var(--primary-dark);
+}
+
+.logo-extremadev .dot {
+    fill: var(--accent);
+}
+
+#header-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 1.2rem;
+}
+
+#header-links a:hover {
+    transform: scale(1.05);
+    text-decoration: underline;
+}
+
+header>a {
+    border: 2px solid var(--black);
+    background-color: var(--primary);
+    color: var(--black);
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+header>a:hover {
+    background-color: var(--primary-light);
+    transform: scale(1.05);
+}
+
+/* HERO */
+#hero {
+    background-image: url("./IMG/dehesa.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+    width: 80vw;
+    border-radius: 20px;
+}
+
+#hero-logo {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    max-width: 320px;
+    height: 100px;
+    align-self: center;
+    justify-self: center;
+}
+
+.logo-extremadev {
+    width: auto;
+    height: 100%;
+    max-width: 320px;
+}
+
+#hero-links {
+    position: absolute;
+    top: 30%;
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+#hero-links a {
+    color: var(--black);
+    border: 2px solid var(--black);
+    background-color: var(--primary);
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+#hero-links a:hover {
+    background-color: var(--primary-light);
+    transform: scale(1.05);
+}
+
+#hero-cards {
+    position: absolute;
+    bottom: 20%;
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#hero-cards div {
+    background-color: var(--accent);
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ABOUT 1 */
+#about-1,
+#about-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80vw;
+    gap: 5vw;
+}
+
+#about-1>div,
+#about-2>div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#about-1 h1,
+#about-1 h3 {
+    color: var(--primary-dark);
+}
+
+#about-2 h1,
+#about-2 h3 {
+    color: var(--accent);
+}
+
+#about-1 img,
+#about-2 img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* PROYECTOS */
+#projects {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 80vw;
+}
+
+#projects>div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+#projects article {
+    width: 20vw;
+    background-color: var(--accent);
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#projects article h3 {
+    margin-bottom: 10px;
+}
+
+/* FORM */
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 80vw;
+}
+
+form {
+    background-color: var(--primary-soft);
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 40vw;
+    max-width: 500px;
+    min-width: 320px;
+
+}
+
+form label {
+    color: var(--primary-dark);
+    font-weight: bold;
+}
+
+form label.placeholder {
+    color: var(--gray-dark);
+    font-size: 12px;
+    font-weight: normal;
+}
+
+form input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--black);
+}
+
+textarea {
+    resize: none;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid var(--black);
+}
+
+form button {
+    border: 2px solid var(--black);
+    background-color: var(--primary);
+    color: var(--black);
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    align-self: center;
+}
+
+form button:hover {
+    background-color: var(--primary-light);
+    transform: scale(1.05);
+}
+
+/* FOOTER */
+footer {
+    background-color: var(--gray-dark);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+    padding: 20px;
+}
+
+footer>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+footer .material-symbols-outlined {
+    font-size: 50px;
+    color: var(--primary);
+}
+
+footer .material-symbols-outlined:hover {
+    transform: scale(1.1);
+    color: var(--primary-light);
+}
+
+footer .logo-extremadev {
+    height: 100px;
+    width: 160px;
+}
+
+@media (max-width: 720px) {
+    #header-links {
+        display: none;
+    }
+
+    #hero-cards {
+        flex-direction: column;
+        gap: 20px;
+        bottom: 10%;
+    }
+
+    #hero-cards div {
+        width: 200px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+
+    footer .logo-extremadev {
+        height: 50px;
+        min-width: 50px;
+    }
+
+    footer .material-symbols-outlined {
+        font-size: 30px;
+        color: var(--primary);
+    }
+
+}
+
