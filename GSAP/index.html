@@ -6,6 +6,10 @@
     <link rel='stylesheet' href='style.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <script type="module" src='script.js' defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
     <title>ExtremaDev</title>
 </head>
 
@@ -19,12 +23,12 @@
             <text x="90" y="48" font-size="30">ExtremaDev</text>
         </svg>
         <div id="header-links">
-            <a>Inicio</a>
-            <a>Servicios</a>
-            <a>Proyectos</a>
-            <a>Contacto</a>
+            <a href="#hero">Inicio</a>
+            <a href="#about-1">Servicios</a>
+            <a href="#projects">Proyectos</a>
+            <a href="#form">Contacto</a>
         </div>
-        <a>Consulta Gratuita</a>
+        <a href="#form">Consulta Gratuita</a>
     </header>
     <main>
         <section id="hero">
@@ -37,10 +41,9 @@
                     <text x="90" y="48" font-size="30">ExtremaDev</text>
                     <text x="92" y="70" font-size="12">Red de programadores rurales</text>
                 </svg>
-                <p></p>
                 <div id="hero-links">
-                    <a>Empezar Proyecto</a>
-                    <a>Ver Portfolio</a>
+                    <a href="#projects">Empezar Proyecto</a>
+                    <a href="#form">Ver Portfolio</a>
                 </div>
                 <div id="hero-cards">
                     <div>
@@ -138,7 +141,7 @@
                 <circle class="dot" cx="70" cy="40" r="6" />
                 <text x="90" y="48" font-size="30">Proyectos</text>
             </svg>
-            <div>
+            <div class="projects-list">
                 <article>
                     <h3>SmartCampo</h3>
                     <p>

@@ -29,6 +29,10 @@ body {
     background-color: var(--gray-light);
 }
 
+a{
+    text-decoration: none;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -38,6 +42,13 @@ main {
     gap: 10vh;
 }
 
+#hero,
+#about-1,
+#about-2,
+#projects,
+#form{
+    scroll-margin-top: 10vh;
+}
 /* HEADER */
 header {
     position: fixed;
@@ -223,19 +234,21 @@ header>a:hover {
 
 #projects>div {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 20px;
     width: 100%;
 }
 
 #projects article {
-    width: 20vw;
+    width: 400px;
+    height: 200px;
     background-color: var(--accent);
     border: 2px solid var(--black);
     border-radius: 20px;
     padding: 20px;
+    display: none;
 }
 
 #projects article h3 {
@@ -376,3 +389,9 @@ footer .logo-extremadev {
 
 }
 
+/* GSAP */
+section:not(#hero),
+footer {
+  opacity: 0;
+  transform: translateY(40px);
+}
