@@ -29,7 +29,7 @@ body {
     background-color: var(--gray-light);
 }
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -46,9 +46,10 @@ main {
 #about-1,
 #about-2,
 #projects,
-#form{
+#form {
     scroll-margin-top: 10vh;
 }
+
 /* HEADER */
 header {
     position: fixed;
@@ -190,7 +191,7 @@ header>a:hover {
     gap: 10px;
 }
 
-/* ABOUT 1 */
+/* ABOUT */
 #about-1,
 #about-2 {
     display: grid;
@@ -220,7 +221,10 @@ header>a:hover {
 #about-2 img {
     width: 100%;
     border-radius: 20px;
+    position: sticky;
+    top: 80px;
 }
+
 
 /* PROYECTOS */
 #projects {
@@ -233,12 +237,12 @@ header>a:hover {
 }
 
 #projects>div {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    justify-content: center;
+    justify-items: center;
     gap: 20px;
-    width: 100%;
+    width: auto;
 }
 
 #projects article {
@@ -248,7 +252,25 @@ header>a:hover {
     border: 2px solid var(--black);
     border-radius: 20px;
     padding: 20px;
-    display: none;
+    top: 15vh;
+}
+
+@media (max-width: 1570px) {
+    #projects>div {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1050px) {
+    #projects>div {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    #projects>div {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 #projects article h3 {
@@ -390,8 +412,16 @@ footer .logo-extremadev {
 }
 
 /* GSAP */
-section:not(#hero),
+/* section:not(#hero), */
+#about-1 > div,
+#about-1 img,
+#about-2 > div,
+#about2 img,
 footer {
-  opacity: 0;
-  transform: translateY(40px);
+    opacity: 0;
+}
+
+#hero-cards > div{
+     opacity: 0;
+     scale: 0.5;
 }
