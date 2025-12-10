@@ -23,10 +23,14 @@
     padding: 0;
     box-sizing: border-box;
     color: var(--black);
+    max-width: 100vw;
 }
 
 body {
     background-color: var(--gray-light);
+    height: 100vh;
+    overflow-x: hidden;
+
 }
 
 a {
@@ -60,7 +64,7 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-inline: 4vw;
+    padding-inline: 5vw;
     background-color: var(--primary-soft);
     z-index: 999;
 }
@@ -102,7 +106,7 @@ header .logo-extremadev {
     text-decoration: underline;
 }
 
-header>a {
+#nav-button {
     border: 2px solid var(--black);
     background-color: var(--primary);
     color: var(--black);
@@ -111,24 +115,26 @@ header>a {
     font-weight: 700;
 }
 
-header>a:hover {
+#nav-button:hover {
     background-color: var(--primary-light);
     transform: scale(1.05);
 }
 
 /* HERO */
 #hero {
+    position: relative;
     background-image: url("./IMG/dehesa.webp");
     background-repeat: no-repeat;
     background-size: cover;
     height: 80vh;
     width: 80vw;
     border-radius: 20px;
+
 }
 
 #hero-logo {
     position: absolute;
-    top: 15%;
+    top: 5vh;
     left: 50%;
     transform: translateX(-50%);
     width: 300px;
@@ -146,7 +152,7 @@ header>a:hover {
 
 #hero-links {
     position: absolute;
-    top: 30%;
+    top: 20vh;
     width: 80vw;
     display: flex;
     flex-direction: row;
@@ -171,7 +177,7 @@ header>a:hover {
 
 #hero-cards {
     position: absolute;
-    bottom: 20%;
+    bottom: 10vh;
     width: 80vw;
     display: flex;
     flex-direction: row;
@@ -188,7 +194,8 @@ header>a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 0.5vh;
+    margin-bottom: 0.5vh;
 }
 
 /* ABOUT */
@@ -198,6 +205,16 @@ header>a:hover {
     grid-template-columns: 1fr 1fr;
     width: 80vw;
     gap: 5vw;
+    position: relative;
+}
+
+@media (max-width: 500px) {
+
+    #about-1,
+    #about-2 {
+        width: 90vw;
+
+    }
 }
 
 #about-1>div,
@@ -222,7 +239,7 @@ header>a:hover {
     width: 100%;
     border-radius: 20px;
     position: sticky;
-    top: 80px;
+    top: 10vh;
 }
 
 
@@ -234,6 +251,12 @@ header>a:hover {
     justify-content: center;
     gap: 20px;
     width: 80vw;
+}
+
+@media (max-width: 500px) {
+    #projects {
+        width: 90vw;
+    }
 }
 
 #projects>div {
@@ -268,10 +291,13 @@ header>a:hover {
 }
 
 @media (max-width: 500px) {
-    #projects>div {
-        grid-template-columns: repeat(2, 1fr);
+    #projects article {
+        width: 80vw;
+        height: auto;
     }
 }
+
+
 
 #projects article h3 {
     margin-bottom: 10px;
@@ -285,6 +311,12 @@ header>a:hover {
     justify-content: center;
     gap: 20px;
     width: 80vw;
+}
+
+@media (max-width: 500px) {
+    #form {
+        width: 90vw;
+    }
 }
 
 form {
@@ -368,6 +400,7 @@ footer>div {
 footer .material-symbols-outlined {
     font-size: 50px;
     color: var(--primary);
+    overflow-y: hidden;
 }
 
 footer .material-symbols-outlined:hover {
@@ -387,8 +420,8 @@ footer .logo-extremadev {
 
     #hero-cards {
         flex-direction: column;
-        gap: 20px;
-        bottom: 10%;
+        gap: 10px;
+        bottom: 5%;
     }
 
     #hero-cards div {
@@ -397,31 +430,43 @@ footer .logo-extremadev {
 
     footer {
         font-size: 12px;
+        padding: 5px;
+        padding-top: 20px;
+    }
+
+    footer>div {
+        gap: 10px
     }
 
     footer .logo-extremadev {
         height: 50px;
         min-width: 50px;
+        width: 20px;
+    }
+
+    #footer-info {
+        width: 50%;
     }
 
     footer .material-symbols-outlined {
         font-size: 30px;
         color: var(--primary);
+
     }
 
 }
 
 /* GSAP */
 /* section:not(#hero), */
-#about-1 > div,
+#about-1>div,
 #about-1 img,
-#about-2 > div,
+#about-2>div,
 #about2 img,
 footer {
     opacity: 0;
 }
 
-#hero-cards > div{
-     opacity: 0;
-     scale: 0.5;
+#hero-cards>div {
+    opacity: 0;
+    scale: 0.5;
 }

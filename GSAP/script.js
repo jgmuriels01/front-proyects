@@ -36,6 +36,8 @@ let about1ImgElement = document.querySelector('#about-1 img')
 let about2ImgElement = document.querySelector('#about-2 img')
 let about2DivElement = document.querySelector('#about-2 > div')
 
+let startValue = window.innerWidth < 750 ? "top 150%" : "top 90%";
+
 function gsapAppear(element) {
     gsap.fromTo(element,
         { opacity: 0, y: 50 },
@@ -46,7 +48,7 @@ function gsapAppear(element) {
             ease: "power2.inOut",
             scrollTrigger: {
                 trigger: element,
-                start: "top 85%",
+                start: startValue,
                 toggleActions: "play none none none",
             }
         }
@@ -63,7 +65,7 @@ function gsapRight(element) {
             ease: "power2.inOut",
             scrollTrigger: {
                 trigger: element,
-                start: "top 80%",
+                start: startValue,
                 toggleActions: "play none none none",
             }
         }
@@ -79,8 +81,8 @@ function gsapLeft(element) {
             ease: "power2.inOut",
             scrollTrigger: {
                 trigger: element,
-                start: "top 80%",
-                toggleActions: "play none none none",
+                start: startValue,
+                toggleActions: "play none none none"
             }
         }
     )
@@ -96,7 +98,7 @@ function gsapSmall(element) {
             ease: "power2.out",
             scrollTrigger: {
                 trigger: element,
-                start: "top 80%",
+                start: startValue,
                 toggleActions: "play none none none",
             }
         }
